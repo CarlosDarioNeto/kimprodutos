@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="br">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <script type="text/javascript" src="vendedor.js"></script>
+
+    <title>Vendedor</title>
+</head>
+<body>
+
+<!----- hidden inputs ------->
+<input hidden id="linha-buscar-vendedor" th:value="${vendedor.nome}">
+<input hidden id="linha-buscar-vendedor2" th:value="${vendedor.matricula}">
+<input hidden id="linha-buscar-vendedor3" th:value="${vendedoresVendas}">
+<input hidden id="linha-buscar-vendedor4" th:value="${vendedoresValor}">
+<!------ end hd inputs ------->
+
+
+<div id="container-principal">
+    <header> <!-- inicio header-->
+        <h1>Kim Produtos</h1>
+        <nav>
+            <ul>
+                <li><form action="vendedor"><button id="selecionado">Vendedor</button></form></li>
+                <li><form action="produto"><button>Produto</button></form></li>
+                <li><form action="venda"><button>Venda</button></form></li>
+            </ul>
+        </nav>
+    </header> <!-- inicio header-->
+</div> <!-- fim container principal-->
+
+<div id="container-vendedor"> <!-- Inicio container vendedor -->
+    <aside>
+        <div id="barra-lateral">
+            <h2>Vendedor</h2>
+            <ul>
+                <li><button onclick="mostrarContainerCad();" id="cad">Cadastrar</button></li>
+                <li><button onclick="mostrarContainerAlt();" id="alt">Alterar</button></li>
+                <li><button onclick="mostrarContainerDel()" id="del">Deletar</button></li>
+                <li><button onclick="mostrarContainerBus()" id="bus">Buscar</button></li>
+                <li><button onclick="mostrarContainerLis()" id="lis">Listar</button></li>
+            </ul>
+        </div>
+    </aside>
+    <div id="container-tabela"> <!-- container tabelas-->
+
+        <!------------------------------- CADASTRAR -------------------------------->
+
+        <div id="container-cadastrar" hidden> <!-- Inicio container cadastrar -->
+            <h3>Cadastrar Vendedor</h3>
+            <div id="container-cadastro-vendedor">
+                <form action="cadvendedor">
+                    <fieldset>
+                        <legend>
+                            Dados Pessoais:
+                        </legend>
+
+                        <label>Nome:</label><br>
+                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo">
+
+                    </fieldset>
+                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">enviar</button></span>
+                </form>
+            </div>
+        </div> <!-- Fim container cadastrar -->
+
+        <!------------------------------- ALTERAR -------------------------------->
+
+        <div id="container-alterar" hidden> <!-- Inicio container alterar -->
+            <h3>Alterar Vendedor</h3>
+            <div id="container-alterar-vendedor">
+                <form action="altvendedor">
+                    <fieldset>
+                        <legend>
+                            Atualizar Vendedor:
+                        </legend>
+
+                        <label>Informe a Matricula:</label><br>
+                        <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
+
+                        <label>Novo nome:</label><br>
+                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo">
+
+                    </fieldset>
+                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">alterar</button></span>
+                </form>
+            </div>
+        </div> <!-- Fim container alterar -->
+
+        <!------------------------------- DELETAR -------------------------------->
+
+        <div id="container-deletar" hidden> <!-- Inicio container deletar -->
+            <h3>Deletar Vendedor</h3>
+            <div id="container-deletar-vendedor">
+                <form action="delvendedor">
+                    <fieldset>
+                        <legend>
+                            Deletar Vendedor:
+                        </legend>
+
+                        <label>Informe a Matricula:</label><br>
+                        <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
+                    </fieldset>
+                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">deletar</button></span>
+                </form>
+            </div>
+        </div> <!-- Fim container deletar -->
+
+        <!----------------------------- BUSCAR ------------------------------------->
+
+        <div id="container-buscar" hidden > <!-- Inicio container Buscar -->
+
+            <h3>Buscar Vendedor</h3>
+            <div id="container-buscar-vendedor">
+                <form action="busvendedor">
+                    <fieldset>
+                        <legend>
+                            Buscar Vendedor:
+                        </legend>
+
+                        <label>Informe a Matricula:</label><br>
+                        <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
+                    </fieldset>
+                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">buscar</button></span>
+
+                    <div hidden  id="container-tabela-buscar-vendedor">
+                        <table align="center" id="tabela-buscar-vendedor" >
+                            <tbody th:object="${vendedor}">
+                            <tr>
+                                <td class="cabecalho-tabela">Matricula</td>
+                                <td class="cabecalho-tabela">Nome</td>
+                            </tr>
+                            <tr>
+                                <td th:text="${vendedor.matricula}"></td>
+                                <td th:text="${vendedor.nome}"></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </form>
+            </div>
+            <script>
+                mostrarBuscar();
+            </script>
+            <div hidden id="container-vendedor-inexistente">
+                <h3>VENDEDOR INEXISTENTE</h3>
+            </div>
+            <script>
+                vendedorInexistente();
+            </script>
+
+        </div> <!-- Fim container Buscar -->
+
+        <!-- ******************************** LISTAR ****************************-->
+        <div id="container-listar" hidden> <!-- Inicio container listar -->
+            <h3>Listar Vendedores</h3>
+            <div id="container-listar-vendedor">
+
+                <span id="span-btn-listar-vendedores">
+                	<form id="porVendas" action="listarVendedorVendas"></form>
+                	<form id="porValor" action="listarVendedorValor"></form>
+
+                	<button class="btn-cadastro" form="porVendas">POR VENDAS</button>
+                   	<button class="btn-cadastro" form="porValor">POR VALOR</button>
+
+                </span>
+            </div>
+
+            <!---- tabela valor -->
+            <div hidden id="container-tabela-valor-vendedor">
+                <table align="center" class="tabela">
+                    <tr>
+                        <td class="cabecalho-tabela">Matricula</td>
+                        <td class="cabecalho-tabela">Nome</td>
+                        <td class="cabecalho-tabela">Total vendido</td>
+                    </tr>
+                    <tr th:each=" venda, stat : ${vendedoresValor}">
+                        <td th:text="${venda.get('matricula')}" style="font-family:Monaco"></td>
+                        <td th:text="${venda.get('nome')}"></td>
+                        <td th:text="${venda.get('total')}"></td>
+                    </tr>
+                </table>
+            </div>
+            <!---- fim tabela valor ----->
+            <!---- tabela vendas -->
+            <div hidden id="container-tabela-vendas-vendedor">
+                <table align="center" class="tabela" >
+                    <tr>
+                        <td class="cabecalho-tabela">Matricula</td>
+                        <td class="cabecalho-tabela">Nome</td>
+                        <td class="cabecalho-tabela">Total de vendas</td>
+                    </tr>
+                    <tr th:each=" vendas, stat : ${vendedoresVendas}">
+                        <td th:text="${vendas.get('matricula')}" style="font-family:Monaco;" ></td>
+                        <td th:text="${vendas.get('nome')}"></td>
+                        <td th:text="${vendas.get('vendas')}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <script>tabelasVendedorMostrar();</script>
+            <!---- fim tabela vendas ----->
+
+        </div> <!-- Fim container listar -->
+
+
+    </div> <!-- fim container tabelas-->
+</div> <!-- fim container vendedor -->
+
+<footer>
+    <span>&copy;2021</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,371 @@
+/*Animation*/
+@keyframes barrasuperior{
+	from{
+		margin-left: 1000px;
+		opacity: 0;
+		height: 50%;
+	}
+	to{
+		opacity: 1;
+		margin-left: 0;
+	}
+}
+
+@keyframes imagem-home{
+	from{
+		opacity: 1;
+	}
+	to{
+		opacity: 0.5;
+	}
+}
+
+@keyframes placehold{
+	from{
+		margin-bottom: 0;
+	}
+	to{
+		margin-bottom: 18px;
+	}
+}
+
+
+/*-- configurações-- */
+body{
+	margin: 0;
+	padding: 12px;
+	background: #CB9409;
+}
+
+h1{
+	color:#75040F;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 2px 3px 3px black;
+}
+
+/*-- container principal -- */
+#container-principal{
+	background: #FAE865;
+}
+
+/*cabeçalho*/
+
+body#index header{
+	animation-name: barrasuperior;
+	animation-duration: 2s;
+	padding: 10px 0;
+	/*background: linear-gradient( to right, #FAE865, #808000);*/
+	background-image: url("img/textura.png");
+	background-repeat: repeat-x;
+	background-size: 300px;
+}
+
+header{
+	padding: 10px 0;
+	/*background: linear-gradient( to right, #FAE865, #808000);*/
+	background-image: url("img/textura.png");
+	background-repeat: repeat-x;
+	background-size: 300px;
+}
+
+header nav ul li{
+	display: inline-block;
+	margin-right: 12px;
+}
+
+header nav ul li button{
+	padding: 4px 18px;
+	text-transform: uppercase;
+	background: #75040F;
+	color: #FAE865;
+	text-align: center;
+	text-decoration-line: underline;
+	display: block;
+	width: 120px;
+	padding: 6px 0;
+	border:0;
+}
+
+header nav ul li button:hover{
+	background: #808000;
+}
+
+#selecionado{
+    background: #808000;
+}
+
+/*Container vendedor*/
+
+#container-vendedor{
+	background: #FAE865;
+	margin-top:16px;
+	width: 100%;
+	height: 680px;
+	margin-bottom: 25px;
+}
+
+#barra-lateral{
+	position: fixed;
+}
+
+aside{
+	width: 18%;
+	height: 100%;
+	background: #75040F;
+	box-shadow: 2px 3px 3px black;
+	padding:6px 0;
+	position: relative;
+	float: left;
+}
+
+aside h2{
+	text-align: center;
+	color: #FAE865;
+	text-decoration-line: underline;
+}
+
+aside ul li{
+	list-style: none;
+}
+
+aside ul li button{
+	width: 150px;
+	text-align: center;
+	margin-bottom: 12px;
+	background: #FAE865;
+	height: 50px;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 14px;
+	color:#75040F;
+}
+
+aside ul li button:hover{
+
+}
+
+/*container-tabela*/
+
+#container-tabela{
+	width: 80%;
+	margin-left: 20%;
+	height: 100%;
+	box-shadow: 3px 4px 4px black;
+	border-left: 3px double brown;
+	padding-top: 4px;
+	background: #FAE865;
+}
+
+/*footer*/
+footer span{
+	clear: both;
+	text-align: center;
+	display: block;
+}
+
+/*--- index.html -- */
+
+#imagem-home{
+	animation-name: imagem-home;
+	animation-duration: 3s;
+	width: 100%;
+	height: 100%;
+	background-image: url(img/globalizacao.jpg);
+	background-size: cover;
+	opacity: 0.5;
+}
+
+#container-index{
+	background: #FAE865;
+	margin-top:16px;
+	width: 100%;
+	height: 680px;
+	margin-bottom: 25px;
+	position: relative;
+}
+
+.btn-cadastro{
+	text-transform: uppercase;
+	text-align: center;
+	width: 25%;
+	height: 30px;
+	margin-top: 12px;
+	background: #75040F;
+	color: #FAE865;
+	font-weight:bold;
+}
+
+.btn-cadastro:hover{
+	text-transform: uppercase;
+	text-align: center;
+	width: 25%;
+	height: 30px;
+	margin-top: 12px;
+	color: black;
+	background: darkgreen;
+}
+
+.input-nome{
+	width: 420px;
+	margin-left: 4px;
+	height: 35px;
+	font-size: 22px;
+	background-color: lightgreen;
+}
+
+label{
+	font-size: 19px;
+	margin-left: 1%;
+	color: brown;
+}
+
+legend{
+	font-size: 22px;
+	margin-bottom: 16px;
+
+}
+
+fieldset{
+	margin-left: 8px;
+	margin-right: 8px;
+	background-color: orange;
+	border-color: darkred;
+	color: #34211d;
+
+	animation-name: barrasuperior;
+    animation-duration: 2s;
+}
+
+.input-monoespaco{
+	margin-bottom: 35px;
+	font-family:"Monaco";
+	width: 140px;
+	margin-left: 4px;
+	height: 35px;
+	font-size: 22px;
+	padding-left: 15px;
+	background-color: lightgreen;
+	/*background-image: url("img/linhamatricula.png");
+	background-repeat: no-repeat;*/
+	letter-spacing: 1.1em;
+}
+
+
+/******** VENDEDOR ************/
+h3{
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration-line: underline;
+	text-shadow: 1px 2px 3px black;
+	width: 100%;
+	padding-top: 9px;
+	padding-bottom: 14px;
+	background-color: darkorange;
+	margin-top: 0;
+	margin-bottom: 18px;
+	font-size: 24px;
+}
+
+#container-cadastrar{
+   animation-name: barrasuperior;
+   animation-duration: 2s;
+}
+
+#container-alterar{
+   animation-name: barrasuperior;
+   animation-duration: 2s;
+}
+
+#container-deletar{
+   animation-name: barrasuperior;
+   animation-duration: 2s;
+}
+
+#container-buscar{
+   animation-name: barrasuperior;
+   animation-duration: 2s;
+}
+
+#container-listar{
+    animation-name: barrasuperior;
+    animation-duration: 2s;
+}
+
+#tabela-buscar-vendedor{
+	text-align: center;
+	border-collapse: collapse;
+	border:2px solid black;
+	background-color: #FAE865;
+
+}
+
+.cabecalho-tabela{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+table#tabela-buscar-vendedor tr td{
+	border: 1px solid darkred;
+	width: 150px;
+	font-size: 22px;
+}
+
+#container-tabela-buscar-vendedor{
+	background-color: orange;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-top: 18px;
+	margin-left:15%;
+	margin-right:15%;
+}
+
+#span-btn-listar-vendedores{
+	display: block;
+	text-align: center;
+}
+
+span#span-btn-listar-vendedores button{
+
+}
+
+.tabela{
+	text-align: center;
+	border-collapse: collapse;
+	border:2px solid black;
+	background-color: #FAE865;
+}
+
+.tabela tr td{
+	border: 1px solid darkred;
+	width: 250px;
+	font-size: 18px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+#container-tabela-valor-vendedor, #container-tabela-vendas-vendedor{
+	background-color: orange;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin-top: 18px;
+	margin-left:15%;
+	margin-right:15%;
+}
+
+.tdnumero{
+	border: 1px solid darkred;
+	width: 2000px;
+	font-size: 818px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+/********* FIM VENDEDOR ***************/
+/****************** INICIO VENDAS ******************/
+#modal-vendas{
+
+
+}

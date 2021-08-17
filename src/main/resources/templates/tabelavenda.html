@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="br">
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+</head>
+<body>
+
+<!------------------------------- CADASTRAR -------------------------------->
+
+<div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
+    <h3>Cadastrar Venda</h3>
+    <div id="container-cadastro-vendedor">
+        <form action="cadvendedor">
+            <fieldset>
+                <legend>
+                    Dados do vendedor:
+                </legend>
+
+                <label>Matricula:</label><br>
+                <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
+
+            </fieldset>
+            <form id="voltar" action="venda"></form>
+
+            <div align="center"><button type="submit" form="voltar" class="btn-cadastro">VOLTAR</button><button form="enviar" class="btn-cadastro">ENVIAR</button></div><br>
+        </form>
+    </div>
+</div> <!-- Fim container cadastrar -->
+<div id="modal-vendas"> <!---- inicio modal vendas ---->
+    <form id="enviar" action="cadVenda">
+    <fieldset>
+
+
+        <table align="center" class="tabela">
+            <tr>
+                <td class="cabecalho-tabela">Cód</td>
+                <td class="cabecalho-tabela">Produto</td>
+                <td class="cabecalho-tabela">Valor</td>
+                <td class="cabecalho-tabela">Quantidade</td>
+            </tr>
+            <tr th:each="prod, stat: ${produtos}">
+                <td th:text="${prod.get('id')}" ></td>
+                <td th:text="${prod.get('nome')}"></td>
+                <td th:text="${prod.get('valor')}" ></td>
+                <td><input type="number"></td>
+
+            </tr>
+        </table>
+    </fieldset>
+    </form>
+</div> <!---- fim modal vendas--->
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="br">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <script type="text/javascript" src="venda.js"></script>
+
+    <title>Venda</title>
+</head>
+<body>
+<div id="container-principal">
+    <header> <!-- inicio header-->
+        <h1>Kim Produtos</h1>
+        <nav>
+            <ul>
+                <li><form action="vendedor"><button>Vendedor</button></form></li>
+                <li><form action="produto"><button>Produto</button></form></li>
+                <li><form action="venda"><button id="selecionado">Venda</button></form></li>
+            </ul>
+        </nav>
+    </header> <!-- inicio header-->
+</div> <!-- fim container principal-->
+
+<div id="container-vendedor"> <!-- Inicio container vendedor -->
+    <aside>
+        <div>
+            <h2>Venda</h2>
+            <ul>
+                <li><form action="listarProdutosVenda"><button onclick="mostrarContainerCad()">Cadastrar</button></form></li>
+                <li><button onclick="mostrarContainerDel()">Deletar</button></li>
+                <li><button>Listar</button></li>
+            </ul>
+        </div>
+    </aside>
+    <div id="container-tabela"> <!-- container tabelas-->
+
+
+        <!------------------------------- DELETAR -------------------------------->
+
+        <div id="container-deletar" hidden="hidden"> <!-- Inicio container deletar -->
+            <h3>Deletar Venda</h3>
+            <div id="container-deletar-vendedor">
+                <form action="delVenda">
+                    <fieldset>
+                        <legend>
+                            Deletar Venda
+                        </legend>
+
+                        <label>Informe o codigo da venda:</label><br>
+                        <input class="input-monoespaco" style="letter-spacing: 5px; width:205px; "  type="text" name="codigoVenda" maxlength="12"><br>
+                    </fieldset>
+                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">deletar</button></span>
+                </form>
+            </div>
+        </div> <!-- Fim container deletar -->
+    </div> <!-- fim container tabelas-->
+</div> <!-- fim container vendedor -->
+
+<footer>
+    <span>&copy;2021</span>
+</footer>
+
+
+
+</body>
+</html>
