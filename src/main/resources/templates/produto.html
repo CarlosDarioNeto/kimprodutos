@@ -35,7 +35,7 @@
                 <li><button onclick="mostrarContainerCad()">Cadastrar</button></li>
                 <li><button onclick="mostrarContainerAlt()">Alterar</button></li>
                 <li><button onclick="mostrarContainerDel()">Deletar</button></li>
-                <li><form action="listarProduto"><button onmouseup="mostrarContainerLis()" >Listar</button></form></li>
+                <li><form action="listarProduto"><button type="submit">Listar</button></form></li>
             </ul>
         </div>
     </aside>
@@ -107,29 +107,6 @@
                 </form>
             </div>
         </div> <!-- Fim container deletar -->
-
-        <!-- ******************************** LISTAR ****************************-->
-        <div id="container-listar" > <!-- Inicio container listar -->
-            <h3>Listar Produtos</h3>
-
-            <!---- tabela -->
-            <div  id="container-tabela-valor-vendedor">
-                <table align="center" class="tabela">
-                    <tr>
-                        <td class="cabecalho-tabela">ID</td>
-                        <td class="cabecalho-tabela">Nome</td>
-                        <td class="cabecalho-tabela">Valor</td>
-                    </tr>
-                    <tr th:each=" prod, stat : ${produtos}">
-                        <td th:text="${prod.get('id')}" style="font-family:Monaco"></td>
-                        <td th:text="${prod.get('nome')}"></td>
-                        <td th:text="${prod.get('valor')}"></td>
-                    </tr>
-                </table>
-            </div>
-            <!---- fim tabela ----->
-        </div> <!-- Fim container listar -->
-
 
     </div> <!-- fim container tabelas-->
 </div> <!-- fim container vendedor -->

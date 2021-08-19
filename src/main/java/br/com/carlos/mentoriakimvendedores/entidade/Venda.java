@@ -24,9 +24,10 @@ public class Venda {
         this.itens = itens;
     }
 
-    public Venda( String matricula_vendedor,List<Item> itens) {
+    public Venda( String matricula_vendedor,List<Item> itens, double valor_total) {
         this.matricula_vendedor = matricula_vendedor;
         this.itens = itens;
+        this.valor_total = valor_total;
     }
 
     public Venda() {

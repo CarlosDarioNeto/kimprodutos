@@ -31,6 +31,18 @@
     </header> <!-- inicio header-->
 </div> <!-- fim container principal-->
 
+<!--------------------------------- MODAL ---------------------------------->
+<div class="modal" th:hidden="${modalVendedor}">
+    <h4>Vendedor cadastrado com sucesso!</h4>
+    <div th:object="${NovoVendedor}">
+        <p>Nome: <span th:text="${NovoVendedor.getNome()}"></span></p>
+        <p>Matricula: <span th:text="${NovoVendedor.getMatricula()}"></span></p>
+    </div>
+    <span><form action="vendedor"><button class="btn-cadastro">Fechar</button></form></span>
+</div>
+<!--------------------------------- FIM MODAL ---------------------------------->
+
+
 <div id="container-vendedor"> <!-- Inicio container vendedor -->
     <aside>
         <div id="barra-lateral">
@@ -161,11 +173,11 @@
             <div id="container-listar-vendedor">
 
                 <span id="span-btn-listar-vendedores">
-                	<form id="porVendas" action="listarVendedorVendas"></form>
-                	<form id="porValor" action="listarVendedorValor"></form>
+                    <form id="porVendas" action="listarVendedorVendas"></form>
+                    <form id="porValor" action="listarVendedorValor"></form>
 
-                	<button class="btn-cadastro" form="porVendas">POR VENDAS</button>
-                   	<button class="btn-cadastro" form="porValor">POR VALOR</button>
+                    <button class="btn-cadastro" form="porVendas">POR VENDAS</button>
+                    <button class="btn-cadastro" form="porValor">POR VALOR</button>
 
                 </span>
             </div>
@@ -214,5 +226,8 @@
 <footer>
     <span>&copy;2021</span>
 </footer>
+
+
+
 </body>
 </html>

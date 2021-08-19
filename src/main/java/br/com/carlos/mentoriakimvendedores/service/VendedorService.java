@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Tuple;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -14,7 +16,7 @@ public class VendedorService {
     private VendedorDAO vendedorDAO;
 
     public boolean cadastrar(Vendedor vendedor){
-        return vendedorDAO.cadastrar(vendedor);
+        return vendedorDAO.cadastrar(new Vendedor(gerarMatricula(),vendedor.getNome()));
     }
 
     public Vendedor buscar(String matricula){
@@ -35,5 +37,13 @@ public class VendedorService {
 
     public List<Tuple> listarPorValorVendido(){
         return vendedorDAO.listarPorValor();
+    }
+
+    public String gerarMatricula(){
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yymm"));
+    }
+
+    public String informarMatriculaNovoVendedor(String nome){
+        return vendedorDAO.pegarMatriculaPorNome(nome);
     }
 }

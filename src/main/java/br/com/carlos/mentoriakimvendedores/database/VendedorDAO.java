@@ -1,5 +1,6 @@
 package br.com.carlos.mentoriakimvendedores.database;
 
+import br.com.carlos.mentoriakimvendedores.entidade.Venda;
 import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,8 @@ public class VendedorDAO {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
+    int acumulador = 0;
+
     @Bean
     public void criarEntityManager3() {
         entityManager = entityManagerFactory.createEntityManager();
@@ -30,6 +33,7 @@ public class VendedorDAO {
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            cadastrar(new Vendedor(String.valueOf(Integer.parseInt(vendedor.getMatricula()) + 100), vendedor.getNome()));
             return false;
         } finally {
             entityManager.close();
@@ -68,18 +72,18 @@ public class VendedorDAO {
 
     public boolean alterar(Vendedor vendedor) {
         entityManager = entityManagerFactory.createEntityManager();
-        try{
+        try {
             entityManager.getTransaction().begin();
-            if(entityManager.find(Vendedor.class,vendedor.getMatricula()) != null){
+            if (entityManager.find(Vendedor.class, vendedor.getMatricula()) != null) {
                 entityManager.merge(vendedor);
                 entityManager.getTransaction().commit();
                 return true;
-            }else{
+            } else {
                 throw new Exception("Vendedor inexistente");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
-        }finally {
+        } finally {
             entityManager.close();
         }
     }
@@ -93,6 +97,15 @@ public class VendedorDAO {
     public List<Tuple> listarPorValor() {
         Query query = entityManager.createNativeQuery("select sum(valor_total) as total, v.nome as nome, v.matricula as matricula from venda f inner join vendedor v where v.matricula = f.matricula_vendedor group by f.matricula_vendedor order by total desc;", Tuple.class);
         return query.getResultList();
+    }
+
+    public String pegarMatriculaPorNome(String nome){
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Query query= entityManager.createNativeQuery("select matricula from vendedor where nome = '"+nome+"';");
+        String matricula = query.getResultList().get(0).toString();
+        entityManager.close();
+        return matricula;
     }
 }
 

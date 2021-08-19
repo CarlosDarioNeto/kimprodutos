@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="br">
 <head>
-    <title></title>
+    <title>Cadastrar Venda</title>
     <link rel="stylesheet" type="text/css" href="estilo.css">
     <link rel="stylesheet" type="text/css" href="normalize.css">
 </head>
 <body>
 
 <!------------------------------- CADASTRAR -------------------------------->
+<form id="voltar" action="venda"></form>
+<form id="enviar" action="cadVenda">
+    <div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
+        <h3>Cadastrar Venda</h3>
 
-<div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
-    <h3>Cadastrar Venda</h3>
-    <div id="container-cadastro-vendedor">
-        <form action="cadvendedor">
+        <div id="container-cadastro-vendedor">
+
             <fieldset>
                 <legend>
                     Dados do vendedor:
@@ -22,34 +24,31 @@
                 <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
 
             </fieldset>
-            <form id="voltar" action="venda"></form>
+
 
             <div align="center"><button type="submit" form="voltar" class="btn-cadastro">VOLTAR</button><button form="enviar" class="btn-cadastro">ENVIAR</button></div><br>
-        </form>
-    </div>
-</div> <!-- Fim container cadastrar -->
-<div id="modal-vendas"> <!---- inicio modal vendas ---->
-    <form id="enviar" action="cadVenda">
-    <fieldset>
 
+        </div>
+    </div> <!-- Fim container cadastrar -->
+    <div id="modal-vendas"> <!---- inicio modal vendas ---->
+        <fieldset>
+            <table align="center" class="tabela">
+                <tr>
+                    <td style="width: 100px;" class="cabecalho-tabela">Cód</td>
+                    <td style="width: 600px;" class="cabecalho-tabela">Produto</td>
+                    <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
+                    <td style="width: 50px;" class="cabecalho-tabela">Quantidade</td>
+                </tr>
+                <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
+                    <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
+                    <td style="width: 600px;" th:text="${prod.getNome()}"></td>
+                    <td style="width: 200px;" th:text="${prod.getPreco()}"></td>
+                    <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
 
-        <table align="center" class="tabela">
-            <tr>
-                <td class="cabecalho-tabela">Cód</td>
-                <td class="cabecalho-tabela">Produto</td>
-                <td class="cabecalho-tabela">Valor</td>
-                <td class="cabecalho-tabela">Quantidade</td>
-            </tr>
-            <tr th:each="prod, stat: ${produtos}">
-                <td th:text="${prod.get('id')}" ></td>
-                <td th:text="${prod.get('nome')}"></td>
-                <td th:text="${prod.get('valor')}" ></td>
-                <td><input type="number"></td>
-
-            </tr>
-        </table>
-    </fieldset>
-    </form>
-</div> <!---- fim modal vendas--->
+                </tr>
+            </table>
+        </fieldset>
+    </div> <!---- fim modal vendas--->
+</form>
 </body>
 </html>

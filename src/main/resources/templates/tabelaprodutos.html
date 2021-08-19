@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="br">
+<head>
+    <title>Lista de Produtos</title>
+    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+</head>
+<body>
+
+<!-- ******************************** LISTAR ****************************-->
+<div id="container-listar" > <!-- Inicio container listar -->
+    <h3>Listar Produtos</h3>
+
+    <!---- tabela -->
+    <div  id="container-tabela-valor-vendedor">
+        <span><form action="produto"><button class="btn-cadastro">Voltar</button></form></span>
+        <table align="center" class="tabela">
+            <tr>
+                <td style="width: 100px;" class="cabecalho-tabela">ID</td>
+                <td style="width: 600px;" class="cabecalho-tabela">Nome</td>
+                <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
+            </tr>
+            <tr th:each=" prod, stat : ${produtos}">
+                <td style="width: 100px; font-family:Monaco" th:text="${prod.get('id')}"></td>
+                <td style="width: 600px;" th:text="${prod.get('nome')}"></td>
+                <td style="width: 200px;" th:text="${prod.get('valor')}"></td>
+            </tr>
+        </table>
+    </div>
+    <!---- fim tabela ----->
+</div> <!-- Fim container listar -->
+</body>
+</html>
