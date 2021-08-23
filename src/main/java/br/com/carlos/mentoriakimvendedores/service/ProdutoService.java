@@ -5,27 +5,49 @@ import br.com.carlos.mentoriakimvendedores.entidade.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Tuple;
 import java.util.List;
-import java.util.Map;
+
 @Service
 public class ProdutoService {
     @Autowired
     private ProdutoDAO produtoDAO;
 
     public boolean cadastrar(Produto produto) {
-        return produtoDAO.cadastrar(produto);
+        try{
+            produtoDAO.cadastrar(new Produto(produto.getId(), produto.getNome(), produto.getValor(), '1'));
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public boolean deletar(int id) {
-        return produtoDAO.deletar(id);
+        try{
+            produtoDAO.deletar(id);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     public boolean alterar(Produto produto) {
-        return produtoDAO.alterar(produto);
+        try{
+            if(produto.getAtivo()=='1'){
+                 produtoDAO.alterar(produto);
+            }else{
+                 produtoDAO.alterar(new Produto(produto.getId(),produto.getNome(),produto.getValor(),produtoDAO.buscar(produto.getId()).getAtivo()));
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
-    public List<Tuple> listar() {
-        return produtoDAO.listar();
+    public List<Produto> listar() {
+        try{
+            return produtoDAO.listar();
+        }catch (Exception e){
+            return null;
+        }
     }
 }

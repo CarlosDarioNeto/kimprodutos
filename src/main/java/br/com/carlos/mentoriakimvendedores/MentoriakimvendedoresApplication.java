@@ -1,8 +1,12 @@
 package br.com.carlos.mentoriakimvendedores;
 
+import br.com.carlos.mentoriakimvendedores.entidade.Produto;
+import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+@EntityScan(basePackageClasses = {Produto.class})
 @SpringBootApplication
 public class MentoriakimvendedoresApplication {
 
@@ -11,12 +15,9 @@ public class MentoriakimvendedoresApplication {
 	}
 }
 
-/* @Bean precisa sempre ser public?
-* duvidas sobre criaçao das tabelas DB
-* SQLDATAexception e outras exceções
-* Usar a list ou o MAP
-* @Bean metodos com o mesmo nome
-* mais de 1 controller
-* problema com o map /..../..../
-*/
+/* Not allowed to create transaction on shared EntityManager - use Spring transactions or EJB CMT instead
+*	Se for fazer faça tudo de um jeito só ou pode variar conforme ser mais adequeado? named querys, vantagem em desempenho?
+	Setar o ativo no construtor da classe ou no service?
+	* Venda service muitas consultas ao DB, ruim né? que tal uma variavel global?
+* */
 

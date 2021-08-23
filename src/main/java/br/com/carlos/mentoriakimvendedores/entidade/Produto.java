@@ -1,11 +1,9 @@
 package br.com.carlos.mentoriakimvendedores.entidade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "produto.list", query = "SELECT p FROM Produto p ")
 @Table(name = "produto")
 public class Produto {
     @Id
@@ -14,6 +12,21 @@ public class Produto {
     private String nome;
     @Column(name = "preco")
     private double valor;
+    @Column
+    private char ativo;
+
+    public Produto(int id, String nome, double valor, char ativo) {
+        this.id = id;
+        this.nome = nome;
+        this.valor = valor;
+        this.ativo = ativo;
+    }
+
+    public Produto(String nome, double valor, char ativo) {
+        this.nome = nome;
+        this.valor = valor;
+        this.ativo = ativo;
+    }
 
     public Produto(int id, String nome, double valor) {
         this.id = id;
@@ -52,5 +65,13 @@ public class Produto {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public char getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(char ativo) {
+        this.ativo = ativo;
     }
 }

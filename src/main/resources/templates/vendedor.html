@@ -23,8 +23,8 @@
         <h1>Kim Produtos</h1>
         <nav>
             <ul>
-                <li><form action="vendedor"><button id="selecionado">Vendedor</button></form></li>
-                <li><form action="produto"><button>Produto</button></form></li>
+                <li><form th:action="@{vendedor}"><button id="selecionado">Vendedor</button></form></li>
+                <li><form th:action="@{produto}"><button>Produto</button></form></li>
                 <li><form action="venda"><button>Venda</button></form></li>
             </ul>
         </nav>
@@ -93,7 +93,10 @@
                         <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
 
                         <label>Novo nome:</label><br>
-                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo">
+                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo"><br>
+
+                        <br>
+                        <input class="input-ck" type="checkbox" name="ativar" value="1"><label>Ativo</label>
 
                     </fieldset>
                     <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">alterar</button></span>
@@ -143,10 +146,12 @@
                             <tr>
                                 <td class="cabecalho-tabela">Matricula</td>
                                 <td class="cabecalho-tabela">Nome</td>
+                                <td class="cabecalho-tabela">Ativo</td>
                             </tr>
                             <tr>
                                 <td th:text="${vendedor.matricula}"></td>
                                 <td th:text="${vendedor.nome}"></td>
+                                <td th:text="${ativo}"></td>
                             </tr>
 
                             </tbody>

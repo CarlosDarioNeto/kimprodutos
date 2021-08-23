@@ -372,6 +372,11 @@ span#span-btn-listar-vendedores button{
 	padding-bottom: 3px;
 }
 
+.input-ck{
+    width: 20px;
+    height: 20px;
+}
+
 /********* FIM VENDEDOR ***************/
 /****************** TABELA VENDAS ******************/
 .linhaTabela td input{

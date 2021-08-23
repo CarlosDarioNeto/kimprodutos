@@ -1,9 +1,7 @@
 package br.com.carlos.mentoriakimvendedores.database;
 
-import br.com.carlos.mentoriakimvendedores.entidade.Venda;
 import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -18,101 +16,55 @@ public class VendedorDAO {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    int acumulador = 0;
-
-    @Bean
-    public void criarEntityManager3() {
+    public void cadastrar(Vendedor vendedor) {
         entityManager = entityManagerFactory.createEntityManager();
-    }
-
-    public boolean cadastrar(Vendedor vendedor) {
-        entityManager = entityManagerFactory.createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(vendedor);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            cadastrar(new Vendedor(String.valueOf(Integer.parseInt(vendedor.getMatricula()) + 100), vendedor.getNome()));
-            return false;
-        } finally {
-            entityManager.close();
-        }
+        entityManager.getTransaction().begin();
+        entityManager.persist(vendedor);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public Vendedor buscar(String matricula) {
         entityManager = entityManagerFactory.createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            return entityManager.find(Vendedor.class, matricula);
-        } catch (Exception e) {
-            return null;
-        } finally {
-            entityManager.close();
-        }
+        Vendedor vendedor = entityManager.find(Vendedor.class, matricula);
+        entityManager.close();
+        return vendedor;
     }
 
-    public boolean deletar(String matricula) {
+    public void deletar(String matricula) {
         entityManager = entityManagerFactory.createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            if (entityManager.find(Vendedor.class, matricula) != null) {
-                entityManager.remove(entityManager.find(Vendedor.class, matricula));
-                entityManager.getTransaction().commit();
-                return true;
-            } else {
-                throw new Exception("Vendedor não existe");
-            }
-        } catch (Exception e) {
-            return false;
-        } finally {
-            entityManager.close();
-        }
+        entityManager.getTransaction().begin();
+        Vendedor vendedor = entityManager.find(Vendedor.class, matricula);
+        entityManager.merge(new Vendedor('0', vendedor.getMatricula(), vendedor.getNome()));
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
-    public boolean alterar(Vendedor vendedor) {
+    public void alterar(Vendedor vendedor) {
         entityManager = entityManagerFactory.createEntityManager();
-        try {
-            entityManager.getTransaction().begin();
-            if (entityManager.find(Vendedor.class, vendedor.getMatricula()) != null) {
-                entityManager.merge(vendedor);
-                entityManager.getTransaction().commit();
-                return true;
-            } else {
-                throw new Exception("Vendedor inexistente");
-            }
-        } catch (Exception e) {
-            return false;
-        } finally {
-            entityManager.close();
-        }
+        entityManager.getTransaction().begin();
+        entityManager.merge(vendedor);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public List<Tuple> listarMaiorNumeroDeVendas() {
         entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createNativeQuery("select count(*) as vendas, v.nome as nome, v.matricula as matricula from vendedor v inner join venda f where v.matricula = f.matricula_vendedor group by f.matricula_vendedor order by vendas desc;", Tuple.class);
+        Query query = entityManager.createNativeQuery("select count(*) as vendas, v.nome as nome, v.matricula as matricula from vendedor v inner join venda f where v.matricula = f.matricula_vendedor and v.ativo='1' group by f.matricula_vendedor order by vendas desc;", Tuple.class);
         return query.getResultList();
     }
 
     public List<Tuple> listarPorValor() {
-        Query query = entityManager.createNativeQuery("select sum(valor_total) as total, v.nome as nome, v.matricula as matricula from venda f inner join vendedor v where v.matricula = f.matricula_vendedor group by f.matricula_vendedor order by total desc;", Tuple.class);
+        entityManager = entityManagerFactory.createEntityManager();
+        Query query = entityManager.createNativeQuery("select sum(valor_total) as total, v.nome as nome, v.matricula as matricula from venda f inner join vendedor v where v.matricula = f.matricula_vendedor and v.ativo='1' group by f.matricula_vendedor order by total desc;", Tuple.class);
         return query.getResultList();
     }
 
-    public String pegarMatriculaPorNome(String nome){
+    public String pegarMatriculaPorNome(String nome) {
         entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Query query= entityManager.createNativeQuery("select matricula from vendedor where nome = '"+nome+"';");
+        Query query = entityManager.createNativeQuery("select matricula from vendedor where nome = '" + nome + "';");
         String matricula = query.getResultList().get(0).toString();
         entityManager.close();
         return matricula;
     }
 }
-
-
-
-
- /* for(Tuple rt : t ){
-            System.out.println(rt.get("vendas"));
-            System.out.println(rt.get("vendedor"));
-        }*/

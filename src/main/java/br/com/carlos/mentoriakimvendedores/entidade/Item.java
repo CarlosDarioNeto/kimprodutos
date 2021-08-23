@@ -11,15 +11,17 @@ public class Item  {
     private int id_produto;
     @Column
     private int quantidade;
+    @Column
+    private double preco_corrente;
 
-    public Item(String id, int id_produto, int quantidade) {
+    public Item(String id, int id_produto, int quantidade, double preco_corrente) {
         this.id = id;
         this.id_produto = id_produto;
         this.quantidade = quantidade;
+        this.preco_corrente = preco_corrente;
     }
 
     public Item(int id_produto, int quantidade) {
-        this.id = id;
         this.id_produto = id_produto;
         this.quantidade = quantidade;
     }
@@ -50,5 +52,13 @@ public class Item  {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public double getPreco_corrente() {
+        return preco_corrente;
+    }
+
+    public void setPreco_corrente(double preco_corrente) {
+        this.preco_corrente = preco_corrente;
     }
 }
