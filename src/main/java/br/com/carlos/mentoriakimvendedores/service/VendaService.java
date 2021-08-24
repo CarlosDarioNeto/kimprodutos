@@ -24,7 +24,7 @@ public class VendaService {
 
     public boolean cadastrar(VendaDTO vendaDTO) {
         try {
-            List<Item> itens = removerItensNãoComprados(vendaDTO);
+            List<Item> itens = removerItensNaoComprados(vendaDTO);
             setarValorProdutoCorrente(itens);
             double valorTotal = calcularValorTotalVenda(itens);
             vendaDAO.cadastrarVenda(setIds(new Venda(vendedorDAO.buscar(vendaDTO.getMatricula()), valorTotal, itens)));
@@ -68,7 +68,7 @@ public class VendaService {
         return new Venda(idVenda, venda.getVendedor(), venda.getValor_total(), gerarIdsItens(venda.getItens(), idVenda));
     }
 
-    private List<Item> removerItensNãoComprados(VendaDTO vendaDTO) {
+    private List<Item> removerItensNaoComprados(VendaDTO vendaDTO) {
         return vendaDTO.getItens().stream()
                 .filter(item -> item.getQuantidade() > 0)
                 .map(item -> new Item(item.getId(), item.getQuantidade()))

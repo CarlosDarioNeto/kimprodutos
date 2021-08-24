@@ -4,11 +4,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(name = "list.venda",query = "select v.")
 @Entity
 @Table(name = "venda")
 public class Venda {
     @Id
-    private String id; //21 08 16 08 02 55 ano/mes/dia/hora/min/seg
+    private String id;
     @ManyToOne(targetEntity = Vendedor.class)
     @JoinColumn(name = "matricula_vendedor")
     private Vendedor vendedor;

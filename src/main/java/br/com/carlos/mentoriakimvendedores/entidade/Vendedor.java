@@ -14,21 +14,21 @@ public class Vendedor {
     @Id
     private String matricula;
     @Column
-    private char ativo; //FIXME modificar para char
+    private char ativo;
 
-    public Vendedor(char ativo, String matricula,String nome) {
-        this.ativo=ativo;
+    public Vendedor(char ativo, String matricula, String nome) {
+        this.ativo = ativo;
         this.nome = nome;
         this.matricula = matricula;
     }
 
-    public Vendedor(String matricula,String nome) {
-        this.ativo='1';
+    public Vendedor(String matricula, String nome) {
+        this.ativo = '1';
         this.nome = nome;
         this.matricula = matricula;
     }
 
-    public Vendedor(){
+    public Vendedor() {
 
     }
 

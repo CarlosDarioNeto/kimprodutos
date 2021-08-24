@@ -44,13 +44,12 @@ public class VendedorService {
 
     public boolean alterar(Vendedor vendedor) {
         try {
-            if (vendedor.getAtivo() == '1') {
+            if (isVendedorAtivo(vendedor.getAtivo())) {
                 vendedorDAO.alterar(vendedor);
-                return true;
             } else {
                 vendedorDAO.alterar(new Vendedor(vendedorDAO.buscar(vendedor.getMatricula()).getAtivo(), vendedor.getMatricula(), vendedor.getNome()));
-                return true;
             }
+            return true;
         } catch (Exception e) {
             return false;
         }
@@ -82,5 +81,9 @@ public class VendedorService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private boolean isVendedorAtivo(char ativo){
+        return ativo =='1';
     }
 }
