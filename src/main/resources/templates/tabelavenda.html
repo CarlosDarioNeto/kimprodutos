@@ -39,6 +39,14 @@
                     <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
                     <td style="width: 50px;" class="cabecalho-tabela">Quantidade</td>
                 </tr>
+               <!-- <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
+                    <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
+                    <td style="width: 600px;" th:text="${prod.getNome()}"></td>
+                    <td style="width: 200px;" th:text="${prod.getPreco()}"></td>
+                    <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
+
+                </tr> -->
+
                 <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
                     <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
                     <td style="width: 600px;" th:text="${prod.getNome()}"></td>

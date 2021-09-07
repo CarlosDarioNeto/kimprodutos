@@ -1,6 +1,7 @@
 package br.com.carlos.mentoriakimvendedores.service;
 
 import br.com.carlos.mentoriakimvendedores.database.VendedorDAO;
+import br.com.carlos.mentoriakimvendedores.database.VendedorRepository;
 import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,45 +15,24 @@ import java.util.List;
 public class VendedorService {
     @Autowired
     private VendedorDAO vendedorDAO;
+    @Autowired
+    private VendedorRepository repository;
 
-    public boolean cadastrar(Vendedor vendedor) {
-        try {
-            vendedorDAO.cadastrar(new Vendedor(gerarMatricula(), vendedor.getNome()));
-            return true;
-        } catch (Exception e) {
-            vendedorDAO.cadastrar(new Vendedor(String.valueOf(Integer.parseInt(gerarMatricula()) + 100), vendedor.getNome()));
-            return false;
-        }
+    public Vendedor cadastrar(Vendedor vendedor) {
+        return repository.save(new Vendedor(pegarMatricula(), vendedor.getNome()));
     }
 
     public Vendedor buscar(String matricula) {
-        try {
-            return vendedorDAO.buscar(matricula);
-        } catch (Exception e) {
-            return null;
-        }
+        return repository.findById(matricula);
     }
 
-    public boolean deletar(String matricula) {
-        try {
-            vendedorDAO.deletar(matricula);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Vendedor deletar(String matricula) {
+        Vendedor vendedor = repository.findById(matricula);
+        return repository.save(new Vendedor(false, vendedor.getMatricula(), vendedor.getNome()));
     }
 
-    public boolean alterar(Vendedor vendedor) {
-        try {
-            if (isVendedorAtivo(vendedor.getAtivo())) {
-                vendedorDAO.alterar(vendedor);
-            } else {
-                vendedorDAO.alterar(new Vendedor(vendedorDAO.buscar(vendedor.getMatricula()).getAtivo(), vendedor.getMatricula(), vendedor.getNome()));
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Vendedor alterar(Vendedor vendedor) {
+        return repository.save(vendedor);
     }
 
     public List<Tuple> listarNumeroDeVendas() {
@@ -71,19 +51,23 @@ public class VendedorService {
         }
     }
 
-    public String gerarMatricula() {
+    private String gerarMatricula() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yymm"));
+    }
+
+    private String pegarMatricula() {
+        int matricula = Integer.parseInt(gerarMatricula());
+        while (repository.findById(String.valueOf(matricula)) != null) {
+            matricula += 100;
+        }
+        return String.valueOf(matricula);
     }
 
     public String informarMatriculaNovoVendedor(String nome) {
         try {
-            return vendedorDAO.pegarMatriculaPorNome(nome);
+            return (repository.findByNome(nome)).getMatricula();
         } catch (Exception e) {
             return null;
         }
-    }
-
-    private boolean isVendedorAtivo(char ativo){
-        return ativo =='1';
     }
 }

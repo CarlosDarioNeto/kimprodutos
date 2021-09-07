@@ -10,7 +10,7 @@ public class TabelaProdutos {
     @Column(name = "id")
     private int id;
     @Column (name = "nome")
-    private String nome;
+    private String nome;  // A entidade item tem o id_produto no lugar do nome;
     @Column (name = "preco")
     private double preco;
     @Column (name = "quantidade")

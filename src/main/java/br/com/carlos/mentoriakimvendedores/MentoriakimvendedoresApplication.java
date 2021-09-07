@@ -15,9 +15,8 @@ public class MentoriakimvendedoresApplication {
 	}
 }
 
-/* Not allowed to create transaction on shared EntityManager - use Spring transactions or EJB CMT instead
-*	Se for fazer faça tudo de um jeito só ou pode variar conforme ser mais adequeado? named querys, vantagem em desempenho?
-	Setar o ativo no construtor da classe ou no service?
-	* Venda service muitas consultas ao DB, ruim né? que tal uma variavel global?
-* */
+/*
+ * um repository para cada entidade ou um generico <object,object>
+ * no produtoservice, chamo o cadastrar da classe ou o repository no deletar por exemplo
+ */
 

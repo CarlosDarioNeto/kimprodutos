@@ -13,16 +13,16 @@ public class Produto {
     @Column(name = "preco")
     private double valor;
     @Column
-    private char ativo;
+    private boolean ativo = true;
 
-    public Produto(int id, String nome, double valor, char ativo) {
+    public Produto(int id, String nome, double valor, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
         this.ativo = ativo;
     }
 
-    public Produto(String nome, double valor, char ativo) {
+    public Produto(String nome, double valor, boolean ativo) {
         this.nome = nome;
         this.valor = valor;
         this.ativo = ativo;
@@ -34,7 +34,7 @@ public class Produto {
         this.valor = valor;
     }
 
-    public Produto(String nome, double valor) {
+    public Produto(String nome, double valor) {   //usar construtor assim ou outro construtor passando um parametro fake
         this.nome = nome;
         this.valor = valor;
     }
@@ -67,11 +67,11 @@ public class Produto {
         this.valor = valor;
     }
 
-    public char getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(char ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 }

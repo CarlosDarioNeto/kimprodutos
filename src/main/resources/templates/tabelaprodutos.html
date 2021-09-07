@@ -25,7 +25,7 @@
                 <td style="width: 100px; font-family:Monaco" th:text="${prod.getId()}"></td>
                 <td style="width: 600px;" th:text="${prod.getNome()}"></td>
                 <td style="width: 200px;" th:text="${prod.getValor()}"></td>
-                <td style="width: 200px;" th:text="${prod.getAtivo()} == '1' ?'SIM':'NÃO' "></td>
+                <td style="width: 200px;" th:text="${prod.isAtivo()} ?'SIM':'NÃO' "></td>
             </tr>
         </table>
     </div>

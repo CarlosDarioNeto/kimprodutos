@@ -1,7 +1,9 @@
 package br.com.carlos.mentoriakimvendedores.service;
 
 import br.com.carlos.mentoriakimvendedores.database.VendaDAO;
+import br.com.carlos.mentoriakimvendedores.database.VendaRepository;
 import br.com.carlos.mentoriakimvendedores.database.VendedorDAO;
+import br.com.carlos.mentoriakimvendedores.database.VendedorRepository;
 import br.com.carlos.mentoriakimvendedores.entidade.Item;
 import br.com.carlos.mentoriakimvendedores.entidade.Venda;
 import br.com.carlos.mentoriakimvendedores.entidade.VendaDTO;
@@ -12,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,27 +23,20 @@ public class VendaService {
     @Autowired
     private VendaDAO vendaDAO;
     @Autowired
-    private VendedorDAO vendedorDAO;
+    private VendedorRepository vendedorRepository;
+    @Autowired
+    private VendaRepository repository;
 
-    public boolean cadastrar(VendaDTO vendaDTO) {
-        try {
-            List<Item> itens = removerItensNaoComprados(vendaDTO);
-            setarValorProdutoCorrente(itens);
-            double valorTotal = calcularValorTotalVenda(itens);
-            vendaDAO.cadastrarVenda(setIds(new Venda(vendedorDAO.buscar(vendaDTO.getMatricula()), valorTotal, itens)));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Venda cadastrar(VendaDTO vendaDTO) {
+        List<Item> itens = removerItensNaoComprados(vendaDTO);
+        setarValorProdutoCorrente(itens);
+        double valorTotal = calcularValorTotalVenda(itens);
+        return repository.save(setIds((new Venda(vendedorRepository.findById(vendaDTO.getMatricula()), valorTotal, itens))));
     }
 
-    public boolean deletar(String id) {
-        try {
-            vendaDAO.deleteVenda(id);
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
+    public Venda deletar(String id) {
+        Venda venda = repository.findById(id);
+        return repository.delete(venda);
     }
 
     public VendaDTO getVendaDto() {
@@ -87,7 +83,6 @@ public class VendaService {
         VendaDTO vendaDTO = getVendaDto();
         for (Item item : itens) {
             item.setPreco_corrente(vendaDTO.getItens().get(item.getId_produto() - 1).getPreco());
-            System.out.println(item.getId_produto());
         }
         return itens;
     }

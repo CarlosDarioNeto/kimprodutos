@@ -38,10 +38,10 @@ public class VendedorController {
     @GetMapping("altvendedor")
     public ModelAndView alterarVendedor(@RequestParam(name = "nome") String nome,
                                         @RequestParam(name = "matricula") String matricula,
-                                        @RequestParam(name = "ativar", defaultValue = "0") char ativo) {
+                                        @RequestParam(name = "ativar", defaultValue = "0") boolean ativo) {
         System.out.println(ativo);
-        if(ativo=='1'){
-            vendedorService.alterar(new Vendedor('1',matricula, nome));
+        if(ativo){
+            vendedorService.alterar(new Vendedor(true,matricula, nome));
         }else{
             vendedorService.alterar(new Vendedor(matricula, nome));
         }
@@ -68,7 +68,7 @@ public class VendedorController {
         ModelAndView modelAndView = new ModelAndView("vendedor");
         if (vendedor != null) {
             modelAndView.addObject("vendedor", vendedor);
-            modelAndView.addObject("ativo", vendedor.getAtivo()=='1' ? "SIM" : "NÃO");
+            modelAndView.addObject("ativo", vendedor.isAtivo() ? "SIM" : "NÃO");
         } else {
             modelAndView.addObject("vendedor", new Vendedor("2", "1"));
             modelAndView.addObject("ativo","-");

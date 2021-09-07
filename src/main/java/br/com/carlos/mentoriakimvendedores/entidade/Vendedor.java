@@ -14,16 +14,16 @@ public class Vendedor {
     @Id
     private String matricula;
     @Column
-    private char ativo;
+    private boolean ativo;
 
-    public Vendedor(char ativo, String matricula, String nome) {
+    public Vendedor(boolean ativo, String matricula, String nome) {
         this.ativo = ativo;
         this.nome = nome;
         this.matricula = matricula;
     }
 
     public Vendedor(String matricula, String nome) {
-        this.ativo = '1';
+        this.ativo = true;
         this.nome = nome;
         this.matricula = matricula;
     }
@@ -48,11 +48,11 @@ public class Vendedor {
         this.matricula = matricula;
     }
 
-    public char getAtivo() {
+    public boolean isAtivo() {
         return ativo;
     }
 
-    public void setAtivo(char ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 }

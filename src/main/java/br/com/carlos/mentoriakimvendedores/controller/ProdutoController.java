@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.Tuple;
 import java.util.List;
 
-@Controller
+@Controller()
 public class ProdutoController {
 
     @Autowired
@@ -33,8 +32,8 @@ public class ProdutoController {
     public ModelAndView alterarProduto(@RequestParam(name = "nome") String nome,
                                        @RequestParam(name = "valor") String valor,
                                        @RequestParam(name = "id") String id,
-                                       @RequestParam(name = "ativar", defaultValue = "0") char ativo) {
-        produtoService.alterar(new Produto(Integer.parseInt(id), nome, Double.parseDouble(valor),ativo));
+                                       @RequestParam(name = "ativar", defaultValue = "0") boolean ativo) {
+        produtoService.alterar(new Produto(Integer.parseInt(id), nome, Double.parseDouble(valor), ativo));
         return new ModelAndView("produto");
     }
 

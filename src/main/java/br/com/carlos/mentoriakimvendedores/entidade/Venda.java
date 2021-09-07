@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(name = "list.venda",query = "select v.")
 @Entity
 @Table(name = "venda")
 public class Venda {
