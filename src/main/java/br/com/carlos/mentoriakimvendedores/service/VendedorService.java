@@ -36,7 +36,7 @@ public class VendedorService {
     }
 
     public List<Tuple> listarNumeroDeVendas() {
-        try {
+      try {
             return vendedorDAO.listarMaiorNumeroDeVendas();
         } catch (Exception e) {
             return null;

@@ -198,7 +198,7 @@
                     <tr th:each=" venda, stat : ${vendedoresValor}">
                         <td th:text="${venda.get('matricula')}" style="font-family:Monaco"></td>
                         <td th:text="${venda.get('nome')}"></td>
-                        <td th:text="${venda.get('total')}"></td>
+                        <td th:text="${venda.get('total')} != null ? ${venda.get('total')} : 0.00 "></td>
                     </tr>
                 </table>
             </div>

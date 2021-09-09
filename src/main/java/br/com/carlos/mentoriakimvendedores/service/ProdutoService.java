@@ -18,6 +18,7 @@ public class ProdutoService {
     }
 
     public Produto deletar(int id) {
+        System.out.println(id);
         Produto produto = repository.findById(id);
         return repository.save(new Produto(produto.getId(),
                 produto.getNome(),

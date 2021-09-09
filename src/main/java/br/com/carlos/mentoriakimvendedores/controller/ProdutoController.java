@@ -2,6 +2,8 @@ package br.com.carlos.mentoriakimvendedores.controller;
 
 import br.com.carlos.mentoriakimvendedores.entidade.Produto;
 import br.com.carlos.mentoriakimvendedores.service.ProdutoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ public class ProdutoController {
 
     @Autowired
     private ProdutoService produtoService;
+    private final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
 
     @GetMapping("produto")
     public ModelAndView showProduto() {

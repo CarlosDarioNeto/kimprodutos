@@ -18,5 +18,6 @@ public class MentoriakimvendedoresApplication {
 /*
  * um repository para cada entidade ou um generico <object,object>
  * no produtoservice, chamo o cadastrar da classe ou o repository no deletar por exemplo
+ * Desempenho - pegando tudo do DB, principalmente para os 'joins'?
  */
 
