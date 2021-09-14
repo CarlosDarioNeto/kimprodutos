@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan(basePackageClasses = {Produto.class})
 @SpringBootApplication
 public class MentoriakimvendedoresApplication {
 

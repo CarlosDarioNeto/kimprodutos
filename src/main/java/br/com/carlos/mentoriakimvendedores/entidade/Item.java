@@ -26,6 +26,12 @@ public class Item  {
         this.quantidade = quantidade;
     }
 
+    public Item(int id_produto, int quantidade,double preco_corrente) {
+        this.id_produto = id_produto;
+        this.quantidade = quantidade;
+        this.preco_corrente = preco_corrente;
+    }
+
     public Item(){
 
     }

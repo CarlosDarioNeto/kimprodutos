@@ -195,10 +195,10 @@
                         <td class="cabecalho-tabela">Nome</td>
                         <td class="cabecalho-tabela">Total vendido</td>
                     </tr>
-                    <tr th:each=" venda, stat : ${vendedoresValor}">
-                        <td th:text="${venda.get('matricula')}" style="font-family:Monaco"></td>
-                        <td th:text="${venda.get('nome')}"></td>
-                        <td th:text="${venda.get('total')} != null ? ${venda.get('total')} : 0.00 "></td>
+                    <tr th:object="${vendedoresValor}" th:each=" venda, stat : ${vendedorees}">
+                        <td th:text="${venda.getMatricula()}" style="font-family:Monaco"></td>
+                        <td th:text="${venda.getNome()}"></td>
+                        <td th:text="${vendedoresValor.get(venda)} != null ? ${vendedoresValor.get(venda)} : 0.00 "></td>
                     </tr>
                 </table>
             </div>
@@ -211,10 +211,10 @@
                         <td class="cabecalho-tabela">Nome</td>
                         <td class="cabecalho-tabela">Total de vendas</td>
                     </tr>
-                    <tr th:each=" vendas, stat : ${vendedoresVendas}">
-                        <td th:text="${vendas.get('matricula')}" style="font-family:Monaco;" ></td>
-                        <td th:text="${vendas.get('nome')}"></td>
-                        <td th:text="${vendas.get('vendas')}"></td>
+                    <tr th:object="${vendedoresVendas}" th:each=" vendas, stat : ${vendedores}">
+                        <td th:text="${vendas.getMatricula()}" style="font-family:Monaco;" ></td>
+                        <td th:text="${vendas.getNome()}"></td>
+                        <td th:text="${vendedoresVendas.get(vendas)} != null ? ${vendedoresVendas.get(vendas)} : 0 "></td>
                     </tr>
                 </table>
             </div>

@@ -3,7 +3,6 @@ package br.com.carlos.mentoriakimvendedores.entidade;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "produto.list", query = "SELECT p FROM Produto p ")
 @Table(name = "produto")
 public class Produto {
     @Id

@@ -1,10 +1,10 @@
 package br.com.carlos.mentoriakimvendedores.service;
 
+import br.com.carlos.mentoriakimvendedores.controller.ApplicationController;
 import br.com.carlos.mentoriakimvendedores.database.*;
-import br.com.carlos.mentoriakimvendedores.entidade.Item;
-import br.com.carlos.mentoriakimvendedores.entidade.Venda;
-import br.com.carlos.mentoriakimvendedores.entidade.VendaDTO;
-import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
+import br.com.carlos.mentoriakimvendedores.entidade.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +13,27 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class VendaService {
     @Autowired
-    private VendaDAO vendaDAO;
+    private ProdutoRepository produtoRepository;
     @Autowired
     private VendedorRepository vendedorRepository;
     @Autowired
     private VendaRepository repository;
+    private final Logger logger = LoggerFactory.getLogger(VendaService.class);
 
-    public Venda cadastrar(VendaDTO vendaDTO) {
-        List<Item> itens = removerItensNaoComprados(vendaDTO);
-        setarValorProdutoCorrente(itens);
-        double valorTotal = calcularValorTotalVenda(itens);
-        return repository.save(setIds((new Venda(vendedorRepository.findById(vendaDTO.getMatricula()), valorTotal, itens))));
+    public Venda cadastrar() {
+
+
+
+        return null;
     }
 
     public Venda deletar(String id) {
@@ -37,12 +41,39 @@ public class VendaService {
         return repository.delete(venda);
     }
 
-    public VendaDTO getVendaDto() {
-        try {
-            return new VendaDTO(vendaDAO.oferecerVenda(), "");
-        } catch (Exception e) {
-            return null;
+    public Venda gerarVenda(){
+        Venda venda = new Venda();
+        List<Produto> produtos = produtoRepository.findAll();
+
+        for(Produto produto : produtos){
+            venda.getItens().add(new Item(produto.getId(),0,produto.getValor()));
         }
+        return venda;
+    }
+
+    public Map<Vendedor,Integer> listarVendedoresPorQuantidadeVendas() {
+        List<Venda> vendas = repository.findAll();
+        Map<Vendedor,Integer> quantidadeVendas = new HashMap<>();
+
+        for(Venda venda : vendas){
+            quantidadeVendas.merge(venda.getVendedor(), 1, Integer::sum);
+        }
+        logger.info("listarVendedoresPorVenda = {}",quantidadeVendas);
+        return quantidadeVendas;
+    }
+
+    public Map<Vendedor,Double> listarVendedoresPorValorVendido(){
+        List<Venda> vendas = repository.findAll();
+        Map<Vendedor,Double> valorVendido = new HashMap<>();
+        for (Venda venda : vendas){
+            if(valorVendido.get(venda.getVendedor()) == null){
+                valorVendido.put(venda.getVendedor(),venda.getValor_total());
+            }else{
+                valorVendido.put(venda.getVendedor(),valorVendido.get(venda.getVendedor())+venda.getValor_total());
+            }
+        }
+        logger.info("listarPorValorVendido = {}",valorVendido);
+        return valorVendido;
     }
 
     private String gerarIdVenda() {
@@ -61,13 +92,13 @@ public class VendaService {
         String idVenda = gerarIdVenda();
         return new Venda(idVenda, venda.getVendedor(), venda.getValor_total(), gerarIdsItens(venda.getItens(), idVenda));
     }
-
+/*
     private List<Item> removerItensNaoComprados(VendaDTO vendaDTO) {
         return vendaDTO.getItens().stream()
                 .filter(item -> item.getQuantidade() > 0)
                 .map(item -> new Item(item.getId(), item.getQuantidade()))
                 .collect(Collectors.toList());
-    }
+    }*/
 
     private Double calcularValorTotalVenda(List<Item> itens) {
         double valorTotal = 0;
@@ -77,11 +108,11 @@ public class VendaService {
         return valorTotal;
     }
 
-    private List<Item> setarValorProdutoCorrente(List<Item> itens) {
+   /* private List<Item> setarValorProdutoCorrente(List<Item> itens) {
         VendaDTO vendaDTO = getVendaDto();
         for (Item item : itens) {
             item.setPreco_corrente(vendaDTO.getItens().get(item.getId_produto() - 1).getPreco());
         }
         return itens;
-    }
+    }*/
 }

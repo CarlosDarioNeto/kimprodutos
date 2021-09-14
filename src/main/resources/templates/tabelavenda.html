@@ -48,9 +48,9 @@
                 </tr> -->
 
                 <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
-                    <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
-                    <td style="width: 600px;" th:text="${prod.getNome()}"></td>
-                    <td style="width: 200px;" th:text="${prod.getPreco()}"></td>
+                    <td style="width: 100px;"><input th:value="${prod.getId_produto()}" th:field="*{itens[__${stat.index}__].id}"></td>
+                    <td style="width: 600px;" th:text="${prod.getId_produto()}"></td>
+                    <td style="width: 200px;" th:text="${prod.getPreco_corrente()}"></td>
                     <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
 
                 </tr>

@@ -1,6 +1,7 @@
 package br.com.carlos.mentoriakimvendedores.controller;
 
 import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
+import br.com.carlos.mentoriakimvendedores.service.VendaService;
 import br.com.carlos.mentoriakimvendedores.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,13 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.persistence.Tuple;
 import java.util.List;
+import java.util.Map;
 
 @Controller()
 public class VendedorController {
     @Autowired
     private VendedorService vendedorService;
+    @Autowired
+    private VendaService vendaService;
 
     @GetMapping("/vendedor")
     public ModelAndView showVendedor() {
@@ -80,9 +83,11 @@ public class VendedorController {
 
     @GetMapping("listarVendedorVendas")
     public ModelAndView listarVendedorVendas() {
-        List<Tuple> vendedoresVendas = vendedorService.listarNumeroDeVendas();
+        Map<Vendedor,Integer> vendedoresVendas =  vendaService.listarVendedoresPorQuantidadeVendas();
+        List<Vendedor> vendedores = vendedorService.listar();
         ModelAndView modelAndView = new ModelAndView("vendedor");
         modelAndView.addObject("vendedoresVendas", vendedoresVendas);
+        modelAndView.addObject("vendedores", vendedores);
         modelAndView.addObject("vendedor", new Vendedor("1", "1"));
         modelAndView.addObject("modalVendedor",true);
         modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
@@ -91,9 +96,15 @@ public class VendedorController {
 
     @GetMapping("listarVendedorValor")
     public ModelAndView listarVendedorValor() {
-        List<Tuple> vendedoresValor = vendedorService.listarPorValorVendido();
+        Map<Vendedor,Double> vendedoresValor = vendaService.listarVendedoresPorValorVendido();
+        List<Vendedor> vendedores = vendedorService.listar();
+
+
         ModelAndView modelAndView = new ModelAndView("vendedor");
+
         modelAndView.addObject("vendedoresValor", vendedoresValor);
+        modelAndView.addObject("vendedorees", vendedores);
+
         modelAndView.addObject("vendedor", new Vendedor("1", "1"));
         modelAndView.addObject("modalVendedor",true);
         modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));

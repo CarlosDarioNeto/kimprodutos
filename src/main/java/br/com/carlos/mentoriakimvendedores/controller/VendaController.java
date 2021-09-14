@@ -1,7 +1,7 @@
 package br.com.carlos.mentoriakimvendedores.controller;
 
 import br.com.carlos.mentoriakimvendedores.entidade.Produto;
-import br.com.carlos.mentoriakimvendedores.entidade.VendaDTO;
+import br.com.carlos.mentoriakimvendedores.entidade.Venda;
 import br.com.carlos.mentoriakimvendedores.service.ProdutoService;
 import br.com.carlos.mentoriakimvendedores.service.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +34,24 @@ public class VendaController {
 
     @GetMapping("listarProdutosVenda")
     public ModelAndView mostrarProdutosVenda() {
-        VendaDTO vendaDTO = vendaService.getVendaDto();
-        List<Produto> produtoList = produtoService.listar();
+        //VendaDTO vendaDTO = vendaService.getVendaDto();
+
+        Venda venda= vendaService.gerarVenda();
+        List<Produto> produtos = produtoService.listar();
+/*
+        venda.getItens().get().getQuantidade()
+        venda.getItens().get().getPreco_corrente()
+        venda.getItens().get().getId_produto()
+*/
         ModelAndView modelAndView = new ModelAndView("tabelavenda");
-        modelAndView.addObject("venda", vendaDTO);
+        modelAndView.addObject("venda", venda);
+        modelAndView.addObject("product", produtos);
         return modelAndView;
     }
 
     @GetMapping("cadVenda")
-    public ModelAndView cadastrarVenda(@ModelAttribute VendaDTO venda) {
-        vendaService.cadastrar(venda);
+    public ModelAndView cadastrarVenda() {
+
         return new ModelAndView("venda");
     }
 }
