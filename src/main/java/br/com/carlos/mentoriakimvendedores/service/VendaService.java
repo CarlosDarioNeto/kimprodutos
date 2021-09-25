@@ -1,14 +1,17 @@
 package br.com.carlos.mentoriakimvendedores.service;
 
-import br.com.carlos.mentoriakimvendedores.controller.ApplicationController;
-import br.com.carlos.mentoriakimvendedores.database.*;
-import br.com.carlos.mentoriakimvendedores.entidade.*;
+import br.com.carlos.mentoriakimvendedores.database.ProdutoRepository;
+import br.com.carlos.mentoriakimvendedores.database.VendaRepository;
+import br.com.carlos.mentoriakimvendedores.database.VendedorRepository;
+import br.com.carlos.mentoriakimvendedores.entidade.Item;
+import br.com.carlos.mentoriakimvendedores.entidade.Produto;
+import br.com.carlos.mentoriakimvendedores.entidade.Venda;
+import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Tuple;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -29,11 +32,15 @@ public class VendaService {
     private VendaRepository repository;
     private final Logger logger = LoggerFactory.getLogger(VendaService.class);
 
-    public Venda cadastrar() {
+    public Venda cadastrar(Venda venda, String matricula) {
+        Vendedor vendedor= vendedorRepository.findById(matricula);
+        venda.setItens(removerItensNaoComprados(venda));
+        venda = setIds(venda);
+        List<Item> items = setarValorProdutoCorrente(venda.getItens());
+        Double valorototal= calcularValorTotalVenda(items);
 
-
-
-        return null;
+        logger.info("cadastrar venda {}",venda.getItens().size());
+        return repository.save(new Venda(venda.getId(),vendedor,valorototal,items));
     }
 
     public Venda deletar(String id) {
@@ -41,38 +48,37 @@ public class VendaService {
         return repository.delete(venda);
     }
 
-    public Venda gerarVenda(){
+    public Venda gerarVenda() {
         Venda venda = new Venda();
         List<Produto> produtos = produtoRepository.findAll();
-
-        for(Produto produto : produtos){
-            venda.getItens().add(new Item(produto.getId(),0,produto.getValor()));
+        for (Produto produto : produtos) {
+            venda.getItens().add(new Item(produto.getId(), 0, produto.getValor()));
         }
         return venda;
     }
 
-    public Map<Vendedor,Integer> listarVendedoresPorQuantidadeVendas() {
+    public Map<Vendedor, Integer> listarVendedoresPorQuantidadeVendas() {
         List<Venda> vendas = repository.findAll();
-        Map<Vendedor,Integer> quantidadeVendas = new HashMap<>();
+        Map<Vendedor, Integer> quantidadeVendas = new HashMap<>();
 
-        for(Venda venda : vendas){
+        for (Venda venda : vendas) {
             quantidadeVendas.merge(venda.getVendedor(), 1, Integer::sum);
         }
-        logger.info("listarVendedoresPorVenda = {}",quantidadeVendas);
+        logger.info("listarVendedoresPorVenda = {}", quantidadeVendas);
         return quantidadeVendas;
     }
 
-    public Map<Vendedor,Double> listarVendedoresPorValorVendido(){
+    public Map<Vendedor, Double> listarVendedoresPorValorVendido() {
         List<Venda> vendas = repository.findAll();
-        Map<Vendedor,Double> valorVendido = new HashMap<>();
-        for (Venda venda : vendas){
-            if(valorVendido.get(venda.getVendedor()) == null){
-                valorVendido.put(venda.getVendedor(),venda.getValor_total());
-            }else{
-                valorVendido.put(venda.getVendedor(),valorVendido.get(venda.getVendedor())+venda.getValor_total());
+        Map<Vendedor, Double> valorVendido = new HashMap<>();
+        for (Venda venda : vendas) {
+            if (valorVendido.get(venda.getVendedor()) == null) {
+                valorVendido.put(venda.getVendedor(), venda.getValor_total());
+            } else {
+                valorVendido.put(venda.getVendedor(), valorVendido.get(venda.getVendedor()) + venda.getValor_total());
             }
         }
-        logger.info("listarPorValorVendido = {}",valorVendido);
+        logger.info("listarPorValorVendido = {}", valorVendido);
         return valorVendido;
     }
 
@@ -81,7 +87,7 @@ public class VendaService {
     }
 
     private List<Item> gerarIdsItens(List<Item> itens, String idVenda) {
-        NumberFormat formatoIdItem = new DecimalFormat("0000"); //aqui ou novo método?
+        NumberFormat formatoIdItem = new DecimalFormat("0000");
         for (int i = 0; i < itens.size(); i++) {
             itens.get(i).setId(idVenda + formatoIdItem.format(i));
         }
@@ -92,13 +98,12 @@ public class VendaService {
         String idVenda = gerarIdVenda();
         return new Venda(idVenda, venda.getVendedor(), venda.getValor_total(), gerarIdsItens(venda.getItens(), idVenda));
     }
-/*
-    private List<Item> removerItensNaoComprados(VendaDTO vendaDTO) {
-        return vendaDTO.getItens().stream()
+
+    private List<Item> removerItensNaoComprados(Venda venda) {
+        return venda.getItens().stream()
                 .filter(item -> item.getQuantidade() > 0)
-                .map(item -> new Item(item.getId(), item.getQuantidade()))
                 .collect(Collectors.toList());
-    }*/
+    }
 
     private Double calcularValorTotalVenda(List<Item> itens) {
         double valorTotal = 0;
@@ -108,11 +113,11 @@ public class VendaService {
         return valorTotal;
     }
 
-   /* private List<Item> setarValorProdutoCorrente(List<Item> itens) {
-        VendaDTO vendaDTO = getVendaDto();
-        for (Item item : itens) {
-            item.setPreco_corrente(vendaDTO.getItens().get(item.getId_produto() - 1).getPreco());
+    private List<Item> setarValorProdutoCorrente(List<Item> itens) {
+        List<Produto> produtos= produtoRepository.findAll();
+        for(Item item : itens){
+            item.setPreco_corrente(produtos.get(item.getId_produto()).getValor());
         }
         return itens;
-    }*/
+    }
 }

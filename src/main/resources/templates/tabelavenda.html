@@ -13,7 +13,7 @@
     <div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
         <h3>Cadastrar Venda</h3>
 
-        <div id="container-cadastro-vendedor">
+        <div th:object="${venda}" id="container-cadastro-vendedor">
 
             <fieldset>
                 <legend>
@@ -21,7 +21,7 @@
                 </legend>
 
                 <label>Matricula:</label><br>
-                <input class="input-monoespaco"  type="text" name="matricula" maxlength="4"><br>
+                <input class="input-monoespaco" type="text" name="matricula" maxlength="4"><br>
 
             </fieldset>
 
@@ -47,9 +47,9 @@
 
                 </tr> -->
 
-                <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
-                    <td style="width: 100px;"><input th:value="${prod.getId_produto()}" th:field="*{itens[__${stat.index}__].id}"></td>
-                    <td style="width: 600px;" th:text="${prod.getId_produto()}"></td>
+                <tr class="linhaTabela"  th:object="${venda}" th:each="prod, stat: ${venda.itens}">
+                    <td style="width: 100px;"><input th:field="*{itens[__${stat.index}__].Id_produto}" th:value="${prod.getId_produto()}" ></td>
+                    <td style="width: 600px;" th:text="${map_produtos.get(prod.getId_produto())}"></td>
                     <td style="width: 200px;" th:text="${prod.getPreco_corrente()}"></td>
                     <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
 

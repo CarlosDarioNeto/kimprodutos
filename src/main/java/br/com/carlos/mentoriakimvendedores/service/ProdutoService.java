@@ -5,7 +5,9 @@ import br.com.carlos.mentoriakimvendedores.entidade.Produto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProdutoService {
@@ -36,5 +38,14 @@ public class ProdutoService {
 
     public Produto buscar(int id) {
         return repository.findById(id);
+    }
+
+    public Map<Integer,String> listarProdutosPorId(){
+        Map<Integer,String> produtosPorId = new HashMap<>();
+        List<Produto> produtos = repository.findAll();
+        for(Produto produto : produtos){
+            produtosPorId.put(produto.getId(),produto.getNome());
+        }
+        return produtosPorId;
     }
 }

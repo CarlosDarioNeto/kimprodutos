@@ -1,9 +1,11 @@
 package br.com.carlos.mentoriakimvendedores.controller;
 
-import br.com.carlos.mentoriakimvendedores.entidade.Produto;
+import br.com.carlos.mentoriakimvendedores.entidade.Item;
 import br.com.carlos.mentoriakimvendedores.entidade.Venda;
 import br.com.carlos.mentoriakimvendedores.service.ProdutoService;
 import br.com.carlos.mentoriakimvendedores.service.VendaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Map;
 
 @Controller
 public class VendaController {
@@ -20,6 +22,7 @@ public class VendaController {
     private VendaService vendaService;
     @Autowired
     private ProdutoService produtoService;
+    private final static Logger logger = LoggerFactory.getLogger(VendaController.class);
 
     @GetMapping("venda")
     public ModelAndView showVenda() {
@@ -34,24 +37,21 @@ public class VendaController {
 
     @GetMapping("listarProdutosVenda")
     public ModelAndView mostrarProdutosVenda() {
-        //VendaDTO vendaDTO = vendaService.getVendaDto();
-
-        Venda venda= vendaService.gerarVenda();
-        List<Produto> produtos = produtoService.listar();
-/*
-        venda.getItens().get().getQuantidade()
-        venda.getItens().get().getPreco_corrente()
-        venda.getItens().get().getId_produto()
-*/
+        Venda venda = vendaService.gerarVenda();
+        Map<Integer, String> map_produtos = produtoService.listarProdutosPorId();
         ModelAndView modelAndView = new ModelAndView("tabelavenda");
         modelAndView.addObject("venda", venda);
-        modelAndView.addObject("product", produtos);
+        modelAndView.addObject("map_produtos", map_produtos);
+        logger.info("Map Produtos {}",map_produtos.get(1));
+        map_produtos.get(venda.getItens().get(0).getId_produto());
         return modelAndView;
     }
 
     @GetMapping("cadVenda")
-    public ModelAndView cadastrarVenda() {
-
+    public ModelAndView cadastrarVenda(@ModelAttribute(name = "venda") Venda venda,
+                                       @RequestParam(name = "matricula")String matricula) {
+        logger.info("Cadastrar Venda: {}",venda);
+        vendaService.cadastrar(venda,matricula);
         return new ModelAndView("venda");
     }
 }
