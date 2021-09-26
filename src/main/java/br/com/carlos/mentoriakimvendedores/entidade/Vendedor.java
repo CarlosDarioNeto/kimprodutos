@@ -13,23 +13,31 @@ public class Vendedor {
     @Column(name = "matricula")
     @Id
     private String matricula;
-    @Column
+    @Column(name = "active")
     private boolean ativo;
+    @Column
+    private String password;
+    @Column
+    private String roles;
 
-    public Vendedor(boolean ativo, String matricula, String nome) {
+    public Vendedor(){
+
+    }
+
+    public Vendedor(boolean ativo, String matricula, String nome, String password, String roles) {
         this.ativo = ativo;
         this.nome = nome;
         this.matricula = matricula;
+        this.roles = roles;
+        this.password = password;
     }
 
-    public Vendedor(String matricula, String nome) {
+    public Vendedor(String matricula, String nome, String password) {
         this.ativo = true;
         this.nome = nome;
         this.matricula = matricula;
-    }
-
-    public Vendedor() {
-
+        this.password = password;
+        this.roles = "ROLE_ADMIN";
     }
 
     public String getNome() {
@@ -54,5 +62,21 @@ public class Vendedor {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 }

@@ -1,6 +1,6 @@
 package br.com.carlos.mentoriakimvendedores.segurança;
 
-import br.com.carlos.mentoriakimvendedores.entidade.User;
+import br.com.carlos.mentoriakimvendedores.entidade.Vendedor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,23 +10,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DetalhesUsuario implements UserDetails {
+public class DetalhesVendedor implements UserDetails {
 
     private String userName;
     private String password;
     private boolean active;
     private List<GrantedAuthority> authorities;
 
-    public DetalhesUsuario(User user){
-        this.userName = user.getUserName();
-        this.password=user.getPassword();
-        this.active=user.isActive();
-        this.authorities=Arrays.stream(user.getRoles().split(","))
+    public DetalhesVendedor(Vendedor vendedor) {
+        this.userName = vendedor.getNome();
+        this.password = vendedor.getPassword();
+        this.active = vendedor.isAtivo();
+        this.authorities = Arrays.stream(vendedor.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

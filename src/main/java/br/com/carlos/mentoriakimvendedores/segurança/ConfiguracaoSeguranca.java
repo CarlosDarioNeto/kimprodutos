@@ -22,10 +22,14 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/produto").hasRole("ADMIN")
+                .antMatchers("/venda").hasRole("ADMIN")
+                .antMatchers("/vendedor").hasRole("ADMIN")
+                .antMatchers("/tabelavenda").hasRole("ADMIN")
+                .antMatchers("/tabelaproduto").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
-                .and().formLogin();
+                .and().formLogin()
+                .defaultSuccessUrl("/vendedor", true);
 
     }
 

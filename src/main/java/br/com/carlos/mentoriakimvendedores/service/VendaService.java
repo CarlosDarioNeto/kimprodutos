@@ -34,13 +34,12 @@ public class VendaService {
 
     public Venda cadastrar(Venda venda, String matricula) {
         Vendedor vendedor= vendedorRepository.findById(matricula);
+        venda.setItens(setarValorProdutoCorrente(venda.getItens()));
         venda.setItens(removerItensNaoComprados(venda));
         venda = setIds(venda);
-        List<Item> items = setarValorProdutoCorrente(venda.getItens());
-        Double valorototal= calcularValorTotalVenda(items);
-
+        Double valorototal= calcularValorTotalVenda(venda.getItens());
         logger.info("cadastrar venda {}",venda.getItens().size());
-        return repository.save(new Venda(venda.getId(),vendedor,valorototal,items));
+        return repository.save(new Venda(venda.getId(),vendedor,valorototal,venda.getItens()));
     }
 
     public Venda deletar(String id) {
@@ -116,7 +115,7 @@ public class VendaService {
     private List<Item> setarValorProdutoCorrente(List<Item> itens) {
         List<Produto> produtos= produtoRepository.findAll();
         for(Item item : itens){
-            item.setPreco_corrente(produtos.get(item.getId_produto()).getValor());
+            item.setPreco_corrente(produtos.get(item.getId_produto()-1).getValor());
         }
         return itens;
     }

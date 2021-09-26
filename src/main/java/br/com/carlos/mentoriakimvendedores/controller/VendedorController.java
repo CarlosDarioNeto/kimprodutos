@@ -22,36 +22,32 @@ public class VendedorController {
     @GetMapping("/vendedor")
     public ModelAndView showVendedor() {
         ModelAndView modelAndView = new ModelAndView("vendedor");
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
+        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);
         return modelAndView;
     }
 
     @GetMapping("cadvendedor")
-    public ModelAndView cadastrarVendedor(@RequestParam(name = "nome") String nome) {
-        vendedorService.cadastrar(new Vendedor("", nome));
+    public ModelAndView cadastrarVendedor(@RequestParam(name = "nome") String nome, @RequestParam(name = "senha")String senha) {
+        vendedorService.cadastrar(new Vendedor("", nome,senha));
         ModelAndView modelAndView = new ModelAndView("vendedor");
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",false);
-        modelAndView.addObject("NovoVendedor",new Vendedor(vendedorService.informarMatriculaNovoVendedor(nome),nome));
+        modelAndView.addObject("NovoVendedor",new Vendedor(vendedorService.informarMatriculaNovoVendedor(nome),nome,senha));
         return modelAndView;
     }
 
     @GetMapping("altvendedor")
     public ModelAndView alterarVendedor(@RequestParam(name = "nome") String nome,
                                         @RequestParam(name = "matricula") String matricula,
+                                        @RequestParam(name = "senha") String senha,
                                         @RequestParam(name = "ativar", defaultValue = "0") boolean ativo) {
-        System.out.println(ativo);
-        if(ativo){
-            vendedorService.alterar(new Vendedor(true,matricula, nome));
-        }else{
-            vendedorService.alterar(new Vendedor(matricula, nome));
-        }
+        vendedorService.alterar(new Vendedor(ativo,matricula, nome,senha," "));
         ModelAndView modelAndView = new ModelAndView("vendedor");
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         return modelAndView;
     }
 
@@ -59,9 +55,9 @@ public class VendedorController {
     public ModelAndView deletarVendedor(@RequestParam(name = "matricula") String matricula) {
         vendedorService.deletar(matricula);
         ModelAndView modelAndView = new ModelAndView("vendedor");
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         return modelAndView;
     }
 
@@ -73,11 +69,11 @@ public class VendedorController {
             modelAndView.addObject("vendedor", vendedor);
             modelAndView.addObject("ativo", vendedor.isAtivo() ? "SIM" : "NÃO");
         } else {
-            modelAndView.addObject("vendedor", new Vendedor("2", "1"));
+            modelAndView.addObject("vendedor", new Vendedor("2", "1","1"));
             modelAndView.addObject("ativo","-");
         }
         modelAndView.addObject("modalVendedor",true);
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("NovoVendedor",new Vendedor("1", "1","1"));
         return modelAndView;
     }
 
@@ -88,9 +84,9 @@ public class VendedorController {
         ModelAndView modelAndView = new ModelAndView("vendedor");
         modelAndView.addObject("vendedoresVendas", vendedoresVendas);
         modelAndView.addObject("vendedores", vendedores);
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         return modelAndView;
     }
 
@@ -105,9 +101,9 @@ public class VendedorController {
         modelAndView.addObject("vendedoresValor", vendedoresValor);
         modelAndView.addObject("vendedorees", vendedores);
 
-        modelAndView.addObject("vendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);
-        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1"));
+        modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         return modelAndView;
     }
 }

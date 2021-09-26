@@ -1,15 +1,17 @@
-
 create table Produto(
-id int primary key auto_increment,
+id int primary key auto_increment not null,
 nome varchar(40) not null,
 preco float(14,2) not null,
-ativo enum('0','1') not null);
+ativo bool
+);
 
 
 create table Vendedor(
 matricula varchar(4) primary key,
 nome varchar(40) not null,
-ativo enum('0','1') not null
+active bool not null,
+password varchar(20) not null,
+roles varchar(40) not null
 );
 
 

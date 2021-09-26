@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VendedorRepository extends org.springframework.data.repository.Repository<Vendedor, String>, JpaSpecificationExecutor<Vendedor> {
@@ -15,4 +16,6 @@ public interface VendedorRepository extends org.springframework.data.repository.
     Vendedor findByNome(String nome);
 
     List<Vendedor> findAll();
+
+    Optional<Vendedor> findByMatricula(String userName);
 }

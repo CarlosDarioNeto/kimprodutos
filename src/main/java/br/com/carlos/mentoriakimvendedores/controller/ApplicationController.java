@@ -21,4 +21,9 @@ public class ApplicationController {
         vendaService.listarVendedoresPorValorVendido();
         return new ModelAndView("index");
     }
+
+    @GetMapping("/login")
+    public ModelAndView login(){
+        return new ModelAndView("login");
+    }
 }
