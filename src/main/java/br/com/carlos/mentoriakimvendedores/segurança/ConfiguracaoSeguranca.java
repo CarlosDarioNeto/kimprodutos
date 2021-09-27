@@ -29,7 +29,9 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
                 .antMatchers("/tabelaproduto").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin()
-                .defaultSuccessUrl("/vendedor", true);
+                .loginPage("/login.html")
+                .defaultSuccessUrl("/", true)
+                .failureForwardUrl("/login-error.html");
 
     }
 

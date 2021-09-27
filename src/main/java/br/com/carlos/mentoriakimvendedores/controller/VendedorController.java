@@ -22,6 +22,7 @@ public class VendedorController {
     @GetMapping("/vendedor")
     public ModelAndView showVendedor() {
         ModelAndView modelAndView = new ModelAndView("vendedor");
+        modelAndView.addObject("nome","null");
         modelAndView.addObject("vendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("NovoVendedor", new Vendedor("1", "1","1"));
         modelAndView.addObject("modalVendedor",true);

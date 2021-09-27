@@ -21,7 +21,9 @@ public class ProdutoController {
 
     @GetMapping("produto")
     public ModelAndView showProduto() {
-        return new ModelAndView("produto");
+        ModelAndView modelAndView=new ModelAndView("produto");
+        modelAndView.addObject("nome","null");
+        return modelAndView;
     }
 
     @GetMapping("cadProduto")

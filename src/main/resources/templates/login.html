@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/estilo.css}">
+</head>
+<body>
+<div id="container">
+    <h2 align="center">Entrar</h2>
+    <div align="center">
+
+    <form th:action="@{/login.html}" method="post">
+        <label >Username</label>
+        <input class="input-nome" type="text" id="username" name="username" autofocus="autofocus" /> <br><br>
+        <label >Password</label>
+        <input class="input-nome" type="password" id="password" name="password" /> <br><br>
+        <input class="btn-cadastro" id="submit" type="submit" value="Log in" />
+    </form>
+
+    <p th:if="${loginError}" class="error">Matricula ou senha incorreta</p>
+    </div>
+</div>
+</body>
+</html>

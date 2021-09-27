@@ -26,7 +26,9 @@ public class VendaController {
 
     @GetMapping("venda")
     public ModelAndView showVenda() {
-        return new ModelAndView("venda");
+        ModelAndView modelAndView=new ModelAndView("venda");
+        modelAndView.addObject("nome","null");
+        return modelAndView;
     }
 
     @GetMapping("delVenda")
