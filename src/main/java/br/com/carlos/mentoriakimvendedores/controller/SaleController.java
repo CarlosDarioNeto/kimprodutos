@@ -31,7 +31,7 @@ public class SaleController {
 
     @GetMapping("sale")
     public ModelAndView showVenda() {
-        ModelAndView modelAndView=new ModelAndView("sale");
+        ModelAndView modelAndView = new ModelAndView("sale");
         modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         return modelAndView;
     }
@@ -55,9 +55,9 @@ public class SaleController {
 
     @GetMapping("cadastrar_venda")
     public ModelAndView cadastrarVenda(@ModelAttribute(name = "sale") Sale sale,
-                                       @RequestParam(name = "matricula")String matricula) {
+                                       @RequestParam(name = "matricula") String matricula) {
         logger.info("Cadastrar Venda: {}", sale);
-        saleService.cadastrar(sale,matricula);
+        saleService.cadastrar(sale, matricula);
         return new ModelAndView("sale");
     }
 }

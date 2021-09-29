@@ -1,6 +1,9 @@
 package br.com.carlos.mentoriakimvendedores.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "vendedor")
@@ -21,7 +24,7 @@ public class Salesman {
     @Column
     private String roles;
 
-    public Salesman(){
+    public Salesman() {
 
     }
 

@@ -50,7 +50,7 @@ public class SaleService {
         Sale sale = new Sale();
         List<Product> products = productRepository.findAll();
         for (Product product : products) {
-            if(product.isAtivo()){
+            if (product.isAtivo()) {
                 sale.getItens().add(new Item(product.getId(), 0, product.getValor()));
             }
         }

@@ -1,10 +1,13 @@
 package br.com.carlos.mentoriakimvendedores.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "item")
-public class Item  {
+public class Item {
     @Id
     private String id;
     @Column
@@ -26,13 +29,13 @@ public class Item  {
         this.quantidade = quantidade;
     }
 
-    public Item(int id_produto, int quantidade,double preco_corrente) {
+    public Item(int id_produto, int quantidade, double preco_corrente) {
         this.id_produto = id_produto;
         this.quantidade = quantidade;
         this.preco_corrente = preco_corrente;
     }
 
-    public Item(){
+    public Item() {
 
     }
 

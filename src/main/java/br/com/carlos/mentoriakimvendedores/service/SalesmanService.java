@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -78,14 +77,14 @@ public class SalesmanService implements UserDetailsService {
         return vendedor.map(SalesmanDetails::new).get();
     }
 
-    private String encryptingPassword(String password){
+    private String encryptingPassword(String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
 
-    public String getLoggedUsername(){
+    public String getLoggedUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
-            return ((UserDetails)principal).getUsername();
+            return ((UserDetails) principal).getUsername();
         } else {
             return principal.toString();
         }

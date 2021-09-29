@@ -36,10 +36,10 @@ public class ProductService {
         return repository.findAll();
     }
 
-    public Map<Integer,String> listarProdutosPorId(){
-        Map<Integer,String> produtosPorId = new HashMap<>();
+    public Map<Integer, String> listarProdutosPorId() {
+        Map<Integer, String> produtosPorId = new HashMap<>();
         List<Product> products = repository.findAll();
-        for(Product product : products){
+        for (Product product : products) {
             produtosPorId.put(product.getId(), product.getNome());
         }
         return produtosPorId;

@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
@@ -25,7 +24,7 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/product").hasRole("ADMIN")
                 .antMatchers("/sale").hasRole("ADMIN")
-               // .antMatchers("/salesman").hasRole("ADMIN")
+                // .antMatchers("/salesman").hasRole("ADMIN")
                 .antMatchers("/tabelavenda").hasRole("ADMIN")
                 .antMatchers("/tabelaproduto").hasRole("ADMIN")
                 .antMatchers("/").permitAll().antMatchers("/salesman").permitAll()
