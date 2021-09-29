@@ -1,4 +1,4 @@
-package br.com.carlos.mentoriakimvendedores.segurança;
+package br.com.carlos.mentoriakimvendedores.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,11 +7,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
+public class SecuritySettings extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -22,12 +23,12 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/produto").hasRole("ADMIN")
-                .antMatchers("/venda").hasRole("ADMIN")
-                .antMatchers("/vendedor").hasRole("ADMIN")
+                .antMatchers("/product").hasRole("ADMIN")
+                .antMatchers("/sale").hasRole("ADMIN")
+               // .antMatchers("/salesman").hasRole("ADMIN")
                 .antMatchers("/tabelavenda").hasRole("ADMIN")
                 .antMatchers("/tabelaproduto").hasRole("ADMIN")
-                .antMatchers("/").permitAll()
+                .antMatchers("/").permitAll().antMatchers("/salesman").permitAll()
                 .and().formLogin()
                 .loginPage("/login.html")
                 .defaultSuccessUrl("/", true)
@@ -37,6 +38,6 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

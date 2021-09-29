@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" th:href="@{/estilo.css}">
     <link rel="stylesheet" type="text/css" href="normalize.css">
-    <script type="text/javascript" src="produto.js"></script>
+    <script type="text/javascript" src="product.js"></script>
 
     <title>Produto</title>
 </head>
@@ -14,16 +14,16 @@
         <h1>Kim Produtos</h1>
         <nav>
             <ul>
-                <li><form action="vendedor"><button>Vendedor</button></form></li>
-                <li><form action="produto"><button id="selecionado">Produto</button></form></li>
-                <li><form action="venda"><button>Venda</button></form></li>
+                <li><form action="salesman"><button>Vendedor</button></form></li>
+                <li><form action="product"><button id="selecionado">Produto</button></form></li>
+                <li><form action="sale"><button>Venda</button></form></li>
             </ul>
-            <div class="bem-vindo"<span th:text="${nome}"></span>
+            <div class="bem-vindo"><span th:text="${nome}"></span></div>
         </nav>
     </header> <!-- inicio header-->
 </div> <!-- fim container principal-->
 
-<div id="container-vendedor"> <!-- Inicio container vendedor -->
+<div id="container-vendedor"> <!-- Inicio container salesman -->
     <aside>
         <div id="barra-lateral">
             <h2>Produto</h2>
@@ -31,7 +31,7 @@
                 <li><button onclick="mostrarContainerCad()">Cadastrar</button></li>
                 <li><button onclick="mostrarContainerAlt()">Alterar</button></li>
                 <li><button onclick="mostrarContainerDel()">Deletar</button></li>
-                <li><form action="listarProduto"><button type="submit">Listar</button></form></li>
+                <li><form action="show_products"><button type="submit">Listar</button></form></li>
             </ul>
         </div>
     </aside>
@@ -43,7 +43,7 @@
         <div id="container-cadastrar" hidden> <!-- Inicio container cadastrar -->
             <h3>Cadastrar Produto</h3>
             <div id="container-cadastro-vendedor">
-                <form action="cadProduto">
+                <form action="insert_product">
                     <fieldset>
                         <legend>
                             Dados do Produto:
@@ -64,7 +64,7 @@
         <div id="container-alterar" hidden > <!-- Inicio container alterar -->
             <h3>Alterar Produto</h3>
             <div id="container-alterar-vendedor">
-                <form action="altProduto">
+                <form action="update_product">
                     <fieldset>
                         <legend>
                             Atualizar Produto:
@@ -92,7 +92,7 @@
         <div id="container-deletar" hidden > <!-- Inicio container deletar -->
             <h3>Deletar Produto</h3>
             <div id="container-deletar-vendedor">
-                <form action="delproduto">
+                <form action="disable_product">
                     <fieldset>
                         <legend>
                             Deletar Produto:
@@ -107,7 +107,7 @@
         </div> <!-- Fim container deletar -->
 
     </div> <!-- fim container tabelas-->
-</div> <!-- fim container vendedor -->
+</div> <!-- fim container salesman -->
 
 <footer>
     <span>&copy;2021</span>

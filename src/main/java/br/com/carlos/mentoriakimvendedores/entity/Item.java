@@ -1,4 +1,4 @@
-package br.com.carlos.mentoriakimvendedores.entidade;
+package br.com.carlos.mentoriakimvendedores.entity;
 
 import javax.persistence.*;
 

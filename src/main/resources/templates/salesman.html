@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="estilo.css">
     <link rel="stylesheet" type="text/css" href="normalize.css">
-    <script type="text/javascript" src="vendedor.js"></script>
+    <script type="text/javascript" src="salesman.js"></script>
 
     <title>Vendedor</title>
 </head>
 <body>
 
 <!----- hidden inputs ------->
-<input hidden id="linha-buscar-vendedor" th:value="${vendedor.nome}">
-<input hidden id="linha-buscar-vendedor2" th:value="${vendedor.matricula}">
+<input hidden id="linha-buscar-vendedor" th:value="${salesman.nome}">
+<input hidden id="linha-buscar-vendedor2" th:value="${salesman.matricula}">
 <input hidden id="linha-buscar-vendedor3" th:value="${vendedoresVendas}">
 <input hidden id="linha-buscar-vendedor4" th:value="${vendedoresValor}">
 <!------ end hd inputs ------->
@@ -23,11 +23,11 @@
         <h1>Kim Produtos</h1>
         <nav>
             <ul>
-                <li><form th:action="@{vendedor}"><button id="selecionado">Vendedor</button></form></li>
-                <li><form th:action="@{produto}"><button>Produto</button></form></li>
-                <li><form action="venda"><button>Venda</button></form></li>
+                <li><form th:action="@{salesman}"><button id="selecionado">Vendedor</button></form></li>
+                <li><form th:action="@{product}"><button>Produto</button></form></li>
+                <li><form action="sale"><button>Venda</button></form></li>
             </ul>
-            <div class="bem-vindo"<span th:text="${nome}"></span>
+            <div class="bem-vindo"><span th:text="${nome}"></span></div>
         </nav>
     </header> <!-- inicio header-->
 </div> <!-- fim container principal-->
@@ -39,12 +39,12 @@
         <p>Nome: <span th:text="${NovoVendedor.getNome()}"></span></p>
         <p>Matricula: <span th:text="${NovoVendedor.getMatricula()}"></span></p>
     </div>
-    <span><form action="vendedor"><button class="btn-cadastro">Fechar</button></form></span>
+    <span><form action="salesman"><button class="btn-cadastro">Fechar</button></form></span>
 </div>
 <!--------------------------------- FIM MODAL ---------------------------------->
 
 
-<div id="container-vendedor"> <!-- Inicio container vendedor -->
+<div id="container-vendedor"> <!-- Inicio container salesman -->
     <aside>
         <div id="barra-lateral">
             <h2>Vendedor</h2>
@@ -64,14 +64,14 @@
         <div id="container-cadastrar" hidden> <!-- Inicio container cadastrar -->
             <h3>Cadastrar Vendedor</h3>
             <div id="container-cadastro-vendedor">
-                <form action="cadvendedor">
+                <form action="insert_salesman">
                     <fieldset>
                         <legend>
                             Dados Pessoais:
                         </legend>
 
                         <label>Nome:</label><br>
-                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo">
+                        <input class="input-nome" type="text" name="nome" placeholder="Nome Completo"><br>
                         <label>Senha:</label><br>
                         <input class="input-nome" type="password" name="senha" placeholder="Senha">
 
@@ -86,7 +86,7 @@
         <div id="container-alterar" hidden> <!-- Inicio container alterar -->
             <h3>Alterar Vendedor</h3>
             <div id="container-alterar-vendedor">
-                <form action="altvendedor">
+                <form action="update_salesman">
                     <fieldset>
                         <legend>
                             Atualizar Vendedor:
@@ -114,7 +114,7 @@
         <div id="container-deletar" hidden> <!-- Inicio container deletar -->
             <h3>Deletar Vendedor</h3>
             <div id="container-deletar-vendedor">
-                <form action="delvendedor">
+                <form action="disable_salesman">
                     <fieldset>
                         <legend>
                             Deletar Vendedor:
@@ -134,7 +134,7 @@
 
             <h3>Buscar Vendedor</h3>
             <div id="container-buscar-vendedor">
-                <form action="busvendedor">
+                <form action="search_salesman">
                     <fieldset>
                         <legend>
                             Buscar Vendedor:
@@ -145,17 +145,17 @@
                     </fieldset>
                     <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">buscar</button></span>
 
-                    <div hidden  id="container-tabela-buscar-vendedor">
+                    <div hidden id="container-tabela-buscar-vendedor">
                         <table align="center" id="tabela-buscar-vendedor" >
-                            <tbody th:object="${vendedor}">
+                            <tbody th:object="${salesman}">
                             <tr>
                                 <td class="cabecalho-tabela">Matricula</td>
                                 <td class="cabecalho-tabela">Nome</td>
                                 <td class="cabecalho-tabela">Ativo</td>
                             </tr>
                             <tr>
-                                <td th:text="${vendedor.matricula}"></td>
-                                <td th:text="${vendedor.nome}"></td>
+                                <td th:text="${salesman.matricula}"></td>
+                                <td th:text="${salesman.nome}"></td>
                                 <td th:text="${ativo}"></td>
                             </tr>
 
@@ -183,8 +183,8 @@
             <div id="container-listar-vendedor">
 
                 <span id="span-btn-listar-vendedores">
-                    <form id="porVendas" action="listarVendedorVendas"></form>
-                    <form id="porValor" action="listarVendedorValor"></form>
+                    <form id="porVendas" action="list_saleman_by_sales"></form>
+                    <form id="porValor" action="list_saleman_by_value"></form>
 
                     <button class="btn-cadastro" form="porVendas">POR VENDAS</button>
                     <button class="btn-cadastro" form="porValor">POR VALOR</button>
@@ -200,15 +200,15 @@
                         <td class="cabecalho-tabela">Nome</td>
                         <td class="cabecalho-tabela">Total vendido</td>
                     </tr>
-                    <tr th:object="${vendedoresValor}" th:each=" venda, stat : ${vendedorees}">
-                        <td th:text="${venda.getMatricula()}" style="font-family:Monaco"></td>
-                        <td th:text="${venda.getNome()}"></td>
-                        <td th:text="${vendedoresValor.get(venda)} != null ? ${vendedoresValor.get(venda)} : 0.00 "></td>
+                    <tr th:object="${vendedoresValor}" th:each=" sale, stat : ${vendedorees}">
+                        <td th:text="${sale.getMatricula()}" style="font-family:Monaco"></td>
+                        <td th:text="${sale.getNome()}"></td>
+                        <td th:text="${vendedoresValor.get(sale)} != null ? ${vendedoresValor.get(sale)} : 0.00 "></td>
                     </tr>
                 </table>
             </div>
             <!---- fim tabela valor ----->
-            <!---- tabela vendas -->
+            <!---- tabela sales -->
             <div hidden id="container-tabela-vendas-vendedor">
                 <table align="center" class="tabela" >
                     <tr>
@@ -216,22 +216,22 @@
                         <td class="cabecalho-tabela">Nome</td>
                         <td class="cabecalho-tabela">Total de vendas</td>
                     </tr>
-                    <tr th:object="${vendedoresVendas}" th:each=" vendas, stat : ${vendedores}">
-                        <td th:text="${vendas.getMatricula()}" style="font-family:Monaco;" ></td>
-                        <td th:text="${vendas.getNome()}"></td>
-                        <td th:text="${vendedoresVendas.get(vendas)} != null ? ${vendedoresVendas.get(vendas)} : 0 "></td>
+                    <tr th:object="${vendedoresVendas}" th:each=" sales, stat : ${vendedores}">
+                        <td th:text="${sales.getMatricula()}" style="font-family:Monaco;" ></td>
+                        <td th:text="${sales.getNome()}"></td>
+                        <td th:text="${vendedoresVendas.get(sales)} != null ? ${vendedoresVendas.get(sales)} : 0 "></td>
                     </tr>
                 </table>
             </div>
 
             <script>tabelasVendedorMostrar();</script>
-            <!---- fim tabela vendas ----->
+            <!---- fim tabela sales ----->
 
         </div> <!-- Fim container listar -->
 
 
     </div> <!-- fim container tabelas-->
-</div> <!-- fim container vendedor -->
+</div> <!-- fim container salesman -->
 
 <footer>
     <span>&copy;2021</span>

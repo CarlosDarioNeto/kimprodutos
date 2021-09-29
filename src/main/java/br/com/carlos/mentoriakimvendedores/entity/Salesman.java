@@ -1,30 +1,31 @@
-package br.com.carlos.mentoriakimvendedores.entidade;
+package br.com.carlos.mentoriakimvendedores.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "vendedor")
-public class Vendedor {
+public class Salesman {
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "matricula")
     @Id
     private String matricula;
+
     @Column(name = "active")
     private boolean ativo;
+
     @Column
     private String password;
+
     @Column
     private String roles;
 
-    public Vendedor(){
+    public Salesman(){
 
     }
 
-    public Vendedor(boolean ativo, String matricula, String nome, String password, String roles) {
+    public Salesman(boolean ativo, String matricula, String nome, String password, String roles) {
         this.ativo = ativo;
         this.nome = nome;
         this.matricula = matricula;
@@ -32,7 +33,7 @@ public class Vendedor {
         this.password = password;
     }
 
-    public Vendedor(String matricula, String nome, String password) {
+    public Salesman(String matricula, String nome, String password) {
         this.ativo = true;
         this.nome = nome;
         this.matricula = matricula;

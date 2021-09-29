@@ -1,44 +1,50 @@
-package br.com.carlos.mentoriakimvendedores.entidade;
+package br.com.carlos.mentoriakimvendedores.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Product {
     @Id
     private int id;
+
     @Column(name = "nome")
     private String nome;
+
     @Column(name = "preco")
     private double valor;
+
     @Column
     private boolean ativo = true;
 
-    public Produto(int id, String nome, double valor, boolean ativo) {
+    public Product(int id, String nome, double valor, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
         this.ativo = ativo;
     }
 
-    public Produto(String nome, double valor, boolean ativo) {
+    public Product(String nome, double valor, boolean ativo) {
         this.nome = nome;
         this.valor = valor;
         this.ativo = ativo;
     }
 
-    public Produto(int id, String nome, double valor) {
+    public Product(int id, String nome, double valor) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
     }
 
-    public Produto(String nome, double valor) {   //usar construtor assim ou outro construtor passando um parametro fake
+    public Product(String nome, double valor) {   //usar construtor assim ou outro construtor passando um parametro fake
         this.nome = nome;
         this.valor = valor;
     }
 
-    public Produto(){
+    public Product() {
 
     }
 

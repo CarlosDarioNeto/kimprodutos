@@ -1,4 +1,4 @@
-package br.com.carlos.mentoriakimvendedores.entidade;
+package br.com.carlos.mentoriakimvendedores.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -6,32 +6,35 @@ import java.util.List;
 
 @Entity
 @Table(name = "venda")
-public class Venda {
+public class Sale {
     @Id
     private String id;
-    @ManyToOne(targetEntity = Vendedor.class)
+
+    @ManyToOne(targetEntity = Salesman.class)
     @JoinColumn(name = "matricula_vendedor")
-    private Vendedor vendedor;
+    private Salesman salesman;
+
     @Column(name = "valor_total")
     private double valor_total;
+
     @OneToMany(targetEntity = Item.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_venda")
     private List<Item> itens = new ArrayList<>();
 
-    public Venda(Vendedor vendedor, double valor_total, List<Item> itens) {
-        this.vendedor = vendedor;
+    public Sale(Salesman salesman, double valor_total, List<Item> itens) {
+        this.salesman = salesman;
         this.valor_total = valor_total;
         this.itens = itens;
     }
 
-    public Venda(String id, Vendedor vendedor, double valor_total, List<Item> itens) {
+    public Sale(String id, Salesman salesman, double valor_total, List<Item> itens) {
         this.id = id;
-        this.vendedor = vendedor;
+        this.salesman = salesman;
         this.valor_total = valor_total;
         this.itens = itens;
     }
 
-    public Venda() {
+    public Sale() {
 
     }
 
@@ -59,11 +62,11 @@ public class Venda {
         this.itens = itens;
     }
 
-    public Vendedor getVendedor() {
-        return vendedor;
+    public Salesman getVendedor() {
+        return salesman;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public void setVendedor(Salesman salesman) {
+        this.salesman = salesman;
     }
 }
