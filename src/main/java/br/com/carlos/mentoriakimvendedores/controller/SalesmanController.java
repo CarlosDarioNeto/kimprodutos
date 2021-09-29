@@ -22,7 +22,7 @@ public class SalesmanController {
     @GetMapping("salesman")
     public ModelAndView showVendedor() {
         ModelAndView modelAndView = new ModelAndView("salesman");
-        modelAndView.addObject("nome", "null");
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         modelAndView.addObject("salesman", new Salesman("1", "1", "1"));
         modelAndView.addObject("NovoVendedor", new Salesman("1", "1", "1"));
         modelAndView.addObject("modalVendedor", true);
@@ -83,6 +83,7 @@ public class SalesmanController {
         Map<Salesman, Integer> vendedoresVendas = saleService.listarVendedoresPorQuantidadeVendas();
         List<Salesman> vendedores = salesmanService.listar();
         ModelAndView modelAndView = new ModelAndView("salesman");
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         modelAndView.addObject("vendedoresVendas", vendedoresVendas);
         modelAndView.addObject("vendedores", vendedores);
         modelAndView.addObject("salesman", new Salesman("1", "1", "1"));
@@ -95,13 +96,10 @@ public class SalesmanController {
     public ModelAndView listarVendedorValor() {
         Map<Salesman, Double> vendedoresValor = saleService.listarVendedoresPorValorVendido();
         List<Salesman> vendedores = salesmanService.listar();
-
-
         ModelAndView modelAndView = new ModelAndView("salesman");
-
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         modelAndView.addObject("vendedoresValor", vendedoresValor);
         modelAndView.addObject("vendedorees", vendedores);
-
         modelAndView.addObject("salesman", new Salesman("1", "1", "1"));
         modelAndView.addObject("modalVendedor", true);
         modelAndView.addObject("NovoVendedor", new Salesman("1", "1", "1"));

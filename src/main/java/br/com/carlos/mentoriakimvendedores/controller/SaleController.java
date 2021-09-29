@@ -3,6 +3,7 @@ package br.com.carlos.mentoriakimvendedores.controller;
 import br.com.carlos.mentoriakimvendedores.entity.Sale;
 import br.com.carlos.mentoriakimvendedores.service.ProductService;
 import br.com.carlos.mentoriakimvendedores.service.SaleService;
+import br.com.carlos.mentoriakimvendedores.service.SalesmanService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,19 @@ public class SaleController {
 
     @Autowired
     private SaleService saleService;
+
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private SalesmanService salesmanService;
+
     private final static Logger logger = LoggerFactory.getLogger(SaleController.class);
 
     @GetMapping("sale")
     public ModelAndView showVenda() {
         ModelAndView modelAndView=new ModelAndView("sale");
-        modelAndView.addObject("nome","null");
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         return modelAndView;
     }
 

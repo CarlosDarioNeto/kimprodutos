@@ -4,6 +4,7 @@ import br.com.carlos.mentoriakimvendedores.database.SalesmanRepository;
 import br.com.carlos.mentoriakimvendedores.entity.Salesman;
 import br.com.carlos.mentoriakimvendedores.security.SalesmanDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -79,5 +80,14 @@ public class SalesmanService implements UserDetailsService {
 
     private String encryptingPassword(String password){
         return new BCryptPasswordEncoder().encode(password);
+    }
+
+    public String getLoggedUsername(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails)principal).getUsername();
+        } else {
+            return principal.toString();
+        }
     }
 }
