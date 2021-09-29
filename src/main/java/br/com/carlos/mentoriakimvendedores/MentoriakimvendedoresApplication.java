@@ -10,6 +10,3 @@ public class MentoriakimvendedoresApplication {
         SpringApplication.run(MentoriakimvendedoresApplication.class, args);
     }
 }
-
-/*
-* no banco de dados, coluna roles enum ou varchar*/

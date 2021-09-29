@@ -8,16 +8,16 @@
 <body>
 
 <!------------------------------- CADASTRAR -------------------------------->
-<form id="voltar" action="venda"></form>
-<form id="enviar" action="cadVenda">
+<form id="voltar" action="sale"></form>
+<form id="enviar" action="cadastrar_venda">
     <div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
         <h3>Cadastrar Venda</h3>
 
-        <div th:object="${venda}" id="container-cadastro-vendedor">
+        <div th:object="${sale}" id="container-cadastro-vendedor">
 
             <fieldset>
                 <legend>
-                    Dados do vendedor:
+                    Dados do salesman:
                 </legend>
 
                 <label>Matricula:</label><br>
@@ -30,7 +30,7 @@
 
         </div>
     </div> <!-- Fim container cadastrar -->
-    <div id="modal-vendas"> <!---- inicio modal vendas ---->
+    <div id="modal-sales"> <!---- inicio modal sales ---->
         <fieldset>
             <table align="center" class="tabela">
                 <tr>
@@ -39,7 +39,7 @@
                     <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
                     <td style="width: 50px;" class="cabecalho-tabela">Quantidade</td>
                 </tr>
-               <!-- <tr class="linhaTabela" th:object="${venda}" th:each="prod, stat: ${venda.itens}">
+               <!-- <tr class="linhaTabela" th:object="${sale}" th:each="prod, stat: ${sale.itens}">
                     <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
                     <td style="width: 600px;" th:text="${prod.getNome()}"></td>
                     <td style="width: 200px;" th:text="${prod.getPreco()}"></td>
@@ -47,7 +47,7 @@
 
                 </tr> -->
 
-                <tr class="linhaTabela"  th:object="${venda}" th:each="prod, stat: ${venda.itens}">
+                <tr class="linhaTabela"  th:object="${sale}" th:each="prod, stat: ${sale.itens}">
                     <td style="width: 100px;"><input th:field="*{itens[__${stat.index}__].Id_produto}" th:value="${prod.getId_produto()}" ></td>
                     <td style="width: 600px;" th:text="${map_produtos.get(prod.getId_produto())}"></td>
                     <td style="width: 200px;" th:text="${prod.getPreco_corrente()}"></td>
@@ -56,7 +56,7 @@
                 </tr>
             </table>
         </fieldset>
-    </div> <!---- fim modal vendas--->
+    </div> <!---- fim modal sales--->
 </form>
 </body>
 </html>

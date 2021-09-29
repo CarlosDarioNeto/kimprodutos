@@ -10,7 +10,7 @@ create table Vendedor(
 matricula varchar(4) primary key,
 nome varchar(40) not null,
 active bool not null,
-password varchar(20) not null,
+password varchar(220) not null,
 roles varchar(40) not null
 );
 

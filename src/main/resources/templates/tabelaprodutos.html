@@ -13,7 +13,7 @@
 
     <!---- tabela -->
     <div  id="container-tabela-valor-vendedor">
-        <span><form action="produto"><button class="btn-cadastro">Voltar</button></form></span>
+        <span><form action="product"><button class="btn-cadastro">Voltar</button></form></span>
         <table align="center" class="tabela">
             <tr>
                 <td style="width: 100px;" class="cabecalho-tabela">ID</td>
@@ -21,7 +21,7 @@
                 <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
                 <td style="width: 200px;" class="cabecalho-tabela">Ativo</td>
             </tr>
-            <tr th:each=" prod, stat : ${produtos}">
+            <tr th:each=" prod, stat : ${products}">
                 <td style="width: 100px; font-family:Monaco" th:text="${prod.getId()}"></td>
                 <td style="width: 600px;" th:text="${prod.getNome()}"></td>
                 <td style="width: 200px;" th:text="${prod.getValor()}"></td>
