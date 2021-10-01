@@ -238,7 +238,7 @@ background-color: lightgreen;
     left: 0;
     height:240px;
     opacity:1;
- 	z-index: 322;
+ 	z-index: 3;
  	margin-right: 30%;
      margin-left: 30%;
      margin-top: 15%;
@@ -252,3 +252,16 @@ background-color: lightgreen;
        opacity: 1;
        pointer-events: auto;
      }
+
+     .first_cadastro2{
+	position: absolute;
+	top:40%;
+	right: 25%;
+	width: 50%;
+	padding: 10px;
+	background-color: black;
+	color: beige;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}

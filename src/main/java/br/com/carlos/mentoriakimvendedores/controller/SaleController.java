@@ -49,6 +49,7 @@ public class SaleController {
         ModelAndView modelAndView = new ModelAndView("tabelavenda");
         modelAndView.addObject("sale", sale);
         modelAndView.addObject("map_produtos", map_produtos);
+        modelAndView.addObject("nome",salesmanService.getLoggedUsername());
         logger.info("Map Produtos {}", map_produtos.get(1));
         return modelAndView;
     }
