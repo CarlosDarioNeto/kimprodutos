@@ -34,7 +34,7 @@ public class ApplicationController {
     }
 
     @GetMapping("login")
-    public ModelAndView getLogin(){
+    public ModelAndView getLogin() {
         return new ModelAndView("login");
     }
 
@@ -45,21 +45,27 @@ public class ApplicationController {
     }
 
     @GetMapping("cadastrar-primeira-vez")
-    public ModelAndView primeiroCadastro(){
+    public ModelAndView primeiroCadastro() {
         return new ModelAndView("primeiro-cadastro");
     }
 
     @GetMapping("primeiro_cadastro")
-    public ModelAndView validandoPrimeiroCadastro(@RequestParam(name = "nome")String name,
-                                                  @RequestParam(name = "senha")String password,
-                                                  @RequestParam(name = "codigo")String code){
-        Salesman salesman=new Salesman();
-        if(code.equals("1234")){
-            salesman = salesmanService.cadastrar(new Salesman("1",name,password));
+    public ModelAndView validandoPrimeiroCadastro(@RequestParam(name = "nome") String name,
+                                                  @RequestParam(name = "senha") String password,
+                                                  @RequestParam(name = "codigo") String code) {
+        Salesman salesman = new Salesman();
+        if (code.equals("1234")) {
+            salesman = salesmanService.cadastrar(new Salesman("1", name, password));
         }
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("modalVendedor", false);
         modelAndView.addObject("NovoVendedor", salesman);
         return modelAndView;
     }
+/*
+    @RequestMapping("/logout.html")
+    public ModelAndView logout() {
+        ModelAndView modelAndView = new ModelAndView("index");
+        return modelAndView;
+    }*/
 }

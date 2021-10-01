@@ -20,7 +20,9 @@
             <h2 > Kim Produtos </h2>
         </div>
         <div class="col-1 mt-2">
-            <input type="button" name="logout" value="Exit" class="btn bg-danger btn-danger">
+            <form th:action="@{/logout.html}" method="post">
+                <input type="submit" name="logout" value="Exit" class="btn bg-danger btn-danger">
+            </form>
         </div>
         <div class="row">
             <nav class="col-6">
@@ -28,8 +30,10 @@
                 <form action="salesman" id="form-salesman" ></form>
                 <form action="sale" id="form-sale"></form>
                 <form action="product" id="form-product"></form>
+                <form action="/" id="form-home"></form>
                 <!-- end forms -->
                 <ul class="nav nav-tabs nav-justified">
+                    <li class="nav nav-item list-header"><button type="submit" form="form-home" class="nav nav-link text-dark" >HOME</button></li>
                     <li class="nav nav-item list-header"><button type="submit" form="form-salesman" class="nav nav-link text-dark" >SALESMAN</button></li>
                     <li class="nav nav-item list-header"><button type="submit" form="form-product" class="nav nav-link text-dark" >PRODUCT</button></li>
                     <li class="nav nav-item list-header"><a class="nav nav-link active text-muted" >SALE</a></li>
@@ -54,7 +58,7 @@
                 <!---- tabela -->
                 <div  id="container-tabela-valor-vendedor">
                     <span style="text-align: center;"><form action="product"><button  class="btn btn-success">Voltar</button></form></span>
-                    <table align="center" class="table" style="width: 800px;">
+                    <table align="center" class="table table-dark table-striped mt-2" style="width: 800px;">
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>

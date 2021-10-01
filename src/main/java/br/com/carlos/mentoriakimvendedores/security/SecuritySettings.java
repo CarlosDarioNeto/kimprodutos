@@ -24,14 +24,19 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/product").hasRole("ADMIN")
                 .antMatchers("/sale").hasRole("ADMIN")
-                 .antMatchers("/salesman").hasRole("ADMIN")
+                .antMatchers("/salesman").hasRole("ADMIN")
                 .antMatchers("/tabelavenda").hasRole("ADMIN")
                 .antMatchers("/tabelaproduto").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .and().formLogin()
                 .loginPage("/login.html")
                 .defaultSuccessUrl("/", true)
-                .failureForwardUrl("/login-error.html");
+                .failureForwardUrl("/login-error.html")
+                .and()
+                .logout().logoutUrl("/logout.html")
+                .logoutSuccessUrl("/")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true);
 
     }
 

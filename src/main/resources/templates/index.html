@@ -29,7 +29,9 @@
             <h2 > Kim Produtos </h2>
         </div>
         <div class="col-1 mt-2">
-            <input type="button" name="logout" value="Exit" class="btn bg-danger btn-danger">
+            <form th:action="@{/logout.html}" method="post">
+            <input type="submit" name="logout" value="Exit" class="btn bg-danger btn-danger">
+            </form>
         </div>
         <div class="row">
             <nav class="col-6">
@@ -39,6 +41,7 @@
                 <form action="product" id="form-product"></form>
                 <!-- end forms -->
                 <ul class="nav nav-tabs nav-justified">
+                    <li class="nav nav-item list-header"><a class="nav nav-link active text-muted" >HOME</a></li>
                     <li class="nav nav-item list-header"><button type="submit" form="form-salesman" class="nav nav-link text-dark" >SALESMAN</button></li>
                     <li class="nav nav-item list-header"><button type="submit" form="form-product" class="nav nav-link text-dark" >PRODUCT</button></li>
                     <li class="nav nav-item list-header"><button form="form-sale" class="nav nav-link text-dark" >SALE</button></li>

@@ -49,7 +49,7 @@ public class SaleController {
         ModelAndView modelAndView = new ModelAndView("tabelavenda");
         modelAndView.addObject("sale", sale);
         modelAndView.addObject("map_produtos", map_produtos);
-        modelAndView.addObject("nome",salesmanService.getLoggedUsername());
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
         logger.info("Map Produtos {}", map_produtos.get(1));
         return modelAndView;
     }
@@ -59,6 +59,8 @@ public class SaleController {
                                        @RequestParam(name = "matricula") String matricula) {
         logger.info("Cadastrar Venda: {}", sale);
         saleService.cadastrar(sale, matricula);
-        return new ModelAndView("sale");
+        ModelAndView modelAndView = new ModelAndView("sale");
+        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
+        return modelAndView;
     }
 }
