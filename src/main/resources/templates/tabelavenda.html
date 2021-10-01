@@ -1,62 +1,126 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="br">
 <head>
-    <title>Cadastrar Venda</title>
-    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <title>Venda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+
+
 </head>
 <body>
 
-<!------------------------------- CADASTRAR -------------------------------->
-<form id="voltar" action="sale"></form>
-<form id="enviar" action="cadastrar_venda">
-    <div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
-        <h3>Cadastrar Venda</h3>
-
-        <div th:object="${sale}" id="container-cadastro-vendedor">
-
-            <fieldset>
-                <legend>
-                    Dados do salesman:
-                </legend>
-
-                <label>Matricula:</label><br>
-                <input class="input-monoespaco" type="text" name="matricula" maxlength="4"><br>
-
-            </fieldset>
 
 
-            <div align="center"><button type="submit" form="voltar" class="btn-cadastro">VOLTAR</button><button form="enviar" class="btn-cadastro">ENVIAR</button></div><br>
+<header class="container">
+    <div class="row">
+        <div class="col-11 mb-3">
+            <h2 > Kim Produtos </h2>
+        </div>
+        <div class="col-1 mt-2">
+            <input type="button" name="logout" value="Exit" class="btn bg-danger btn-danger">
+        </div>
+        <div class="row">
+            <nav class="col-6">
+                <!-- forms -->
+                <form action="salesman" id="form-salesman" ></form>
+                <form action="sale" id="form-sale"></form>
+                <form action="product" id="form-product"></form>
+                <!-- end forms -->
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav nav-item list-header"><button type="submit" form="form-salesman" class="nav nav-link text-dark" >SALESMAN</button></li>
+                    <li class="nav nav-item list-header"><button type="submit" form="form-product" class="nav nav-link text-dark" >PRODUCT</button></li>
+                    <li class="nav nav-item list-header"><a class="nav nav-link active text-muted" >SALE</a></li>
+                </ul>
+            </nav>
+            <div class="col-3"></div>
+            <div class="col-3" >
+                <p class="bem-vindo nav-link"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg> <span class="nome-logado">Fulano</span></p>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-3" >
+    <div class="row" >
+        <div class="col-12">
+
+            <!------------------------------- CADASTRAR -------------------------------->
+            <form id="voltar" action="sale"></form>
+            <form id="enviar" action="cadastrar_venda">
+                <div id="container-cadastrar"  > <!-- Inicio container cadastrar -->
+                    <h3>Cadastrar Venda</h3>
+
+                    <div th:object="${sale}" id="container-cadastro-vendedor">
+
+                        <fieldset>
+                            <legend>
+                                Matricula:
+                            </legend>
+
+                            <div class="input-group mb-2 ">
+						  <span class="input-group-text" >
+
+						  		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M16.75 8.5a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z"></path><path fill-rule="evenodd" d="M15.75 0a8.25 8.25 0 00-7.851 10.79L.513 18.178A1.75 1.75 0 000 19.414v2.836C0 23.217.784 24 1.75 24h1.5A1.75 1.75 0 005 22.25v-1a.25.25 0 01.25-.25h2.735a.75.75 0 00.545-.22l.214-.213A.875.875 0 009 19.948V18.5a.25.25 0 01.25-.25h1.086c.464 0 .91-.184 1.237-.513l1.636-1.636A8.25 8.25 0 1015.75 0zM9 8.25a6.75 6.75 0 114.288 6.287.75.75 0 00-.804.168l-1.971 1.972a.25.25 0 01-.177.073H9.25A1.75 1.75 0 007.5 18.5v1H5.25a1.75 1.75 0 00-1.75 1.75v1a.25.25 0 01-.25.25h-1.5a.25.25 0 01-.25-.25v-2.836a.25.25 0 01.073-.177l7.722-7.721a.75.75 0 00.168-.804A6.73 6.73 0 019 8.25z"></path></svg>
+						  </span>
+                                <input type="text" class="form-control input-entrada" maxlength="4" minlength="4" name="matricula" placeholder="Matricula" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                        </fieldset>
+
+                        <span style="display:block;text-align: center;">
+            	<button type="submit" form="voltar" style="width: 130px;" class="btn btn-success bg-success">VOLTAR</button>
+            	<button type="submit" form="enviar" style="width: 130px;" class="btn btn-success bg-success">ENVIAR</button>
+            </span>
+
+
+                    </div>
+                </div> <!-- Fim container cadastrar -->
+                <div id="modal-sales"> <!---- inicio modal sales ---->
+                    <fieldset>
+                        <table align="center" style="width: 800px;" class="table table-dark table-striped mt-4">
+                            <tr>
+                                <th>Cód</th>
+                                <th>Produto</th>
+                                <th>Valor</th>
+                                <th>Quantidade</th>
+                            </tr>
+
+                            <tr class="linhaTabela"  th:object="${sale}" th:each="prod, stat: ${sale.itens}">
+                                <td style="width: 150px;"><input style="width: 50px; color: white; border: none;" class="bg-dark" readonly="true" th:field="*{itens[__${stat.index}__].Id_produto}" th:value="${prod.getId_produto()}" ></td>
+                                <td style="width: 300px;" th:text="${map_produtos.get(prod.getId_produto())}"></td>
+                                <td style="width: 150px;" th:text="${prod.getPreco_corrente()}"></td>
+                                <td  ><input style="width: 100px; text-align: center;color: white; border: none;" class="bg-dark" th:field="*{itens[__${stat.index}__].quantidade}" type="number" min="0"></td>
+
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div> <!---- fim modal sales--->
+            </form>
 
         </div>
-    </div> <!-- Fim container cadastrar -->
-    <div id="modal-sales"> <!---- inicio modal sales ---->
-        <fieldset>
-            <table align="center" class="tabela">
-                <tr>
-                    <td style="width: 100px;" class="cabecalho-tabela">Cód</td>
-                    <td style="width: 600px;" class="cabecalho-tabela">Produto</td>
-                    <td style="width: 200px;" class="cabecalho-tabela">Valor</td>
-                    <td style="width: 50px;" class="cabecalho-tabela">Quantidade</td>
-                </tr>
-               <!-- <tr class="linhaTabela" th:object="${sale}" th:each="prod, stat: ${sale.itens}">
-                    <td style="width: 100px;"><input th:value="${prod.getId()}" th:field="*{itens[__${stat.index}__].id}"></td>
-                    <td style="width: 600px;" th:text="${prod.getNome()}"></td>
-                    <td style="width: 200px;" th:text="${prod.getPreco()}"></td>
-                    <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
 
-                </tr> -->
 
-                <tr class="linhaTabela"  th:object="${sale}" th:each="prod, stat: ${sale.itens}">
-                    <td style="width: 100px;"><input th:field="*{itens[__${stat.index}__].Id_produto}" th:value="${prod.getId_produto()}" ></td>
-                    <td style="width: 600px;" th:text="${map_produtos.get(prod.getId_produto())}"></td>
-                    <td style="width: 200px;" th:text="${prod.getPreco_corrente()}"></td>
-                    <td style="width: 50px;"><input th:field="*{itens[__${stat.index}__].quantidade}" type="number"></td>
 
-                </tr>
-            </table>
-        </fieldset>
-    </div> <!---- fim modal sales--->
-</form>
+    </div> <!-- mágica termina-->
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -1,68 +1,114 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="br">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="estilo.css">
+    <title>Venda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="sale.js"></script>
 
-    <title>Venda</title>
+
 </head>
 <body>
-<div id="container-principal">
-    <header> <!-- inicio header-->
-        <h1>Kim Produtos</h1>
-        <nav>
-            <ul>
-                <li><form action="salesman"><button>Vendedor</button></form></li>
-                <li><form action="product"><button>Produto</button></form></li>
-                <li><form action="sale"><button id="selecionado">Venda</button></form></li>
-            </ul>
-            <div class="bem-vindo"><span th:text="${nome}"></span></div>
-        </nav>
-    </header> <!-- inicio header-->
-</div> <!-- fim container principal-->
 
-<div id="container-vendedor"> <!-- Inicio container salesman -->
-    <aside>
-        <div>
-            <h2>Venda</h2>
-            <ul>
-                <li><form action="selecionar_produtos_venda"><button onclick="mostrarContainerCad()">Cadastrar</button></form></li>
-                <li><button onclick="mostrarContainerDel()">Deletar</button></li>
-                <li><button>Listar</button></li>
-            </ul>
+
+
+<header class="container">
+    <div class="row">
+        <div class="col-11 mb-3">
+            <h2 > Kim Produtos </h2>
         </div>
-    </aside>
-    <div id="container-tabela"> <!-- container tabelas-->
-
-
-        <!------------------------------- DELETAR -------------------------------->
-
-        <div id="container-deletar" hidden="hidden"> <!-- Inicio container deletar -->
-            <h3>Deletar Venda</h3>
-            <div id="container-deletar-vendedor">
-                <form action="delete_sale">
-                    <fieldset>
-                        <legend>
-                            Deletar Venda
-                        </legend>
-
-                        <label>Informe o codigo da sale:</label><br>
-                        <input class="input-monoespaco" style="letter-spacing: 5px; width:205px; "  type="text" name="codigoVenda" maxlength="12"><br>
-                    </fieldset>
-                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">deletar</button></span>
-                </form>
+        <div class="col-1 mt-2">
+            <input type="button" name="logout" value="Exit" class="btn bg-danger btn-danger">
+        </div>
+        <div class="row">
+            <nav class="col-6">
+                <!-- forms -->
+                <form action="salesman" id="form-salesman" ></form>
+                <form action="sale" id="form-sale"></form>
+                <form action="product" id="form-product"></form>
+                <!-- end forms -->
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav nav-item list-header"><button type="submit" form="form-salesman" class="nav nav-link text-dark" >SALESMAN</button></li>
+                    <li class="nav nav-item list-header"><button type="submit" form="form-product" class="nav nav-link text-dark" >PRODUCT</button></li>
+                    <li class="nav nav-item list-header"><a class="nav nav-link active text-muted" >SALE</a></li>
+                </ul>
+            </nav>
+            <div class="col-3"></div>
+            <div class="col-3" >
+                <p class="bem-vindo nav-link"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg> <span class="nome-logado">Fulano</span></p>
             </div>
-        </div> <!-- Fim container deletar -->
-    </div> <!-- fim container tabelas-->
-</div> <!-- fim container salesman -->
+        </div>
+    </div>
+</header>
+<div class="container mt-3" >
+    <div class="row" >
+        <aside class="col-1 bg-beige" >
 
-<footer>
-    <span>&copy;2021</span>
-</footer>
+
+            <form action="selecionar_produtos_venda"><button class="btn-list-side" title="Vender" onclick="mostrarContainerCad()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42"><path fill-rule="evenodd" d="M2.75 2A1.75 1.75 0 001 3.75v3.5C1 8.216 1.784 9 2.75 9h18.5A1.75 1.75 0 0023 7.25v-3.5A1.75 1.75 0 0021.25 2H2.75zm18.5 1.5H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h18.5a.25.25 0 00.25-.25v-3.5a.25.25 0 00-.25-.25z"></path><path d="M2.75 10a.75.75 0 01.75.75v9.5c0 .138.112.25.25.25h16.5a.25.25 0 00.25-.25v-9.5a.75.75 0 011.5 0v9.5A1.75 1.75 0 0120.25 22H3.75A1.75 1.75 0 012 20.25v-9.5a.75.75 0 01.75-.75z"></path><path d="M9.75 11.5a.75.75 0 000 1.5h4.5a.75.75 0 000-1.5h-4.5z"></path></svg>
+        </button></form>
+
+            <button class="btn-list-side" title="Deletar" onclick="mostrarContainerDel()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">
+                    <path fill-rule="evenodd" d="M5.72 5.72a.75.75 0 011.06 0L12 10.94l5.22-5.22a.75.75 0 111.06 1.06L13.06 12l5.22 5.22a.75.75 0 11-1.06 1.06L12 13.06l-5.22 5.22a.75.75 0 01-1.06-1.06L10.94 12 5.72 6.78a.75.75 0 010-1.06z"></path>
+                </svg>
+            </button>
+
+            <form> <button class="btn-list-side" title="Listar">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">
+                    <path fill-rule="evenodd" d="M4 7a1 1 0 100-2 1 1 0 000 2zm4.75-1.5a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zm0 6a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zm0 6a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zM5 12a1 1 0 11-2 0 1 1 0 012 0zm-1 7a1 1 0 100-2 1 1 0 000 2z"></path>
+                </svg>
+            </button></form>
+        </aside>
+        <div class="col-11">  <!-- mágica começa-->
+
+            <!------------------------------- DELETAR -------------------------------->
+
+            <div id="container-deletar" hidden="hidden"> <!-- Inicio container deletar -->
+                <h3>Deletar Venda</h3>
+                <div id="container-deletar-vendedor">
+                    <form action="delete_sale">
+                        <fieldset>
+                            <legend>
+                                Deletar Venda
+                            </legend>
+                            <label>Informe o codigo da venda:</label><br>
+                            <!-- input -->
+                            <div class="input-group mb-1 ">
+								<span class="input-group-text" >
+								  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg>
+								</span>
+                                <input type="text" class="form-control input-entrada-id2" name="codigoVenda" placeholder="Sale's code" aria-label="Username" maxlength="12" minlength="12">
+                            </div>
+                            <!-- fim input -->
+                        </fieldset>
+                        <span style="display:block;text-align: center;"><button type="submit" class="btn btn-success bg-success">DELETAR</button></span>
+                    </form>
+                </div>
+            </div> <!-- Fim container deletar -->
 
 
+        </div> <!-- mágica termina-->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 
 </body>
 </html>

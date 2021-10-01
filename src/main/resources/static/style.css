@@ -1,0 +1,254 @@
+
+
+h2{
+	color:black;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 2px 3px 3px black;
+	font-weight: bolder;
+	margin-left: 85px;
+	text-decoration: underline;
+}
+
+header{
+	background-color: beige;
+}
+
+.list-header:hover{
+	background: white;
+	border-radius: 5px;
+	border-bottom: white;
+}
+
+.list-header{
+	color: black;
+	border: none;
+}
+
+a{
+	font-family: hervetica;
+}
+.bem-vindo{
+	margin: 0px;
+	text-transform: uppercase;
+	text-align: center;
+}
+.nome-logado{
+	color: black;
+	margin-left: 7px;
+}
+.bg-beige{
+	background-color: beige;
+	color: black;
+}
+
+.btn-list-side{
+	width: 100%;
+	border-radius: 10px;
+	padding: 12px;
+	background-color: lightgreen;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+.btn-list-side:hover{
+	background-color: green;
+
+}
+
+h3{
+	text-decoration: underline;
+	text-align: center;
+	margin-bottom: 25px;
+	text-transform: uppercase;
+}
+
+#container-cadastro-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#container-cadastrar{
+	border-left: 1px solid black;
+	height: 100%;
+	background-color: beige;
+}
+
+#container-alterar-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#container-alterar{
+	border-left: 1px solid black;
+	height: 100%;
+	background-color: beige;
+}
+
+.input-entrada{
+	background-color: lightgreen;
+	font-weight: bold;
+	text-align: center;
+	letter-spacing: 1.1em;
+	font-family: "Monaco";
+	font-size: 22px;
+}
+.input-entrada:hover {
+background-color: lightgreen;
+}
+
+#container-deletar-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#container-deletar{
+	border-left: 1px solid black;
+	height: 100%;
+	background-color: beige;
+}
+
+#container-buscar-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#container-buscar{
+	border-left: 1px solid black;
+	height: 100%;
+	background-color: beige;
+}
+
+#container-listar-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#container-listar{
+	border-left: 1px solid black;
+	height: 100%;
+	background-color: beige;
+}
+
+.input-entrada-id{
+	background-color: lightgreen;
+	font-weight: bold;
+	text-align: center;
+	font-family: "Monaco";
+	font-size: 22px;
+}
+.input-entrada-id:hover {
+background-color: lightgreen;
+}
+
+.input-entrada-id2{
+	background-color: lightgreen;
+	font-weight: bold;
+	text-align: center;
+	font-family: "Monaco";
+	font-size: 22px;
+	letter-spacing: 0.7em;
+}
+.input-entrada-id2:hover {
+background-color: lightgreen;
+}
+
+#container-cadastro-vendedor{
+	width: 400px;
+	margin: auto;
+}
+
+#img-index{
+	width: 100%;
+	height: 80%;
+	opacity: 0.5;
+}
+
+#logar{
+	position: absolute;
+	top:50%;
+	right: 42%;
+	width: 16%;
+	padding: 10px;
+	background-color: black;
+	color: beige;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+#logar:hover{
+	background-color: gray;
+	color: black;
+}
+
+#cadastrar{
+	position: absolute;
+	top:60%;
+	right: 42%;
+	width: 16%;
+	padding: 10px;
+	background-color: black;
+	color: beige;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+#cadastrar:hover{
+	background-color: gray;
+	color: black;
+}
+
+#first_cadastro{
+	position: absolute;
+	top:60%;
+	right: 25%;
+	width: 50%;
+	padding: 10px;
+	background-color: black;
+	color: beige;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 10px;
+}
+
+.modals h4{
+	background-color: black;
+	font-size: 30px;
+	color: beige;
+	padding: 0;
+	margin: 0;
+	padding: 10px 0;
+}
+ .modals div{
+	font-size: 24px;
+	text-align: left;
+	margin-left: 15px;
+ }
+
+ .modals{
+
+ 	width: 40%;
+ 	text-align: center;
+ 	float: center;
+ 	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height:240px;
+    opacity:1;
+ 	z-index: 322;
+ 	margin-right: 30%;
+     margin-left: 30%;
+     margin-top: 15%;
+     margin-bottom: :35%;
+ 	background-color: lightgray;
+ 	border: solid 2px black;
+ 	transition: opacity 400ms ease-in;
+       pointer-events: auto;
+     }
+     .modals:target {
+       opacity: 1;
+       pointer-events: auto;
+     }

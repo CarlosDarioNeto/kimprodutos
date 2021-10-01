@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="br">
 <head>
-    <title>Inicio</title>
+    <title>Venda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -12,16 +12,7 @@
 </head>
 <body>
 
-<!--------------------------------- MODAL ---------------------------------->
-<div class="modals" th:hidden="${modalVendedor}" >
-    <h4>Vendedor cadastrado com sucesso!</h4>
-    <div th:object="${NovoVendedor}">
-        <p>Nome: <span th:text="${NovoVendedor.getNome()}"></span></p>
-        <p>Matricula: <span th:text="${NovoVendedor.getMatricula()}"></span></p>
-    </div>
-    <span><form action="login"><button class="btn btn-danger">Fechar</button></form></span>
-</div>
-<!--------------------------------- FIM MODAL ---------------------------------->
+
 
 <header class="container">
     <div class="row">
@@ -55,8 +46,14 @@
     <div class="row" >
         <div class="col-12"> <!-- mágica começa-->
             <img id="img-index" src="img/super.jpg">
-            <form action="login"><button id="logar">LOGIN</button></form>
-            <form action="cadastrar-primeira-vez"><button id="cadastrar">FIRST LOGIN</button></form>
+            <div id="first_cadastro">
+                <form action="primeiro_cadastro">
+                    Name:<br><input style="width: 250px;text-align: center;" type="text" name="nome" placeholder="User name"><br><br>
+                    Password:<br><input style="width: 250px; text-align: center;" type="password" maxlength="4" name="senha" placeholder="Password"><br><br>
+                    Verification Code:<br><input style="width: 250px;text-align: center;" type="text" name="codigo" placeholder="Verification code"><br><br>
+                    <button class="btn btn-dark bg-dark" type="submit">ENVIAR</button>
+                </form>
+            </div>
         </div> <!-- mágica termina-->
     </div>
 </div>

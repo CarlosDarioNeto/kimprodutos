@@ -1,116 +1,206 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="br">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/estilo.css}">
+    <title>Vendedor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
     <script type="text/javascript" src="product.js"></script>
 
-    <title>Produto</title>
+
 </head>
 <body>
-<div id="container-principal">
-    <header> <!-- inicio header-->
-        <h1>Kim Produtos</h1>
-        <nav>
-            <ul>
-                <li><form action="salesman"><button>Vendedor</button></form></li>
-                <li><form action="product"><button id="selecionado">Produto</button></form></li>
-                <li><form action="sale"><button>Venda</button></form></li>
-            </ul>
-            <div class="bem-vindo"><span th:text="${nome}"></span></div>
-        </nav>
-    </header> <!-- inicio header-->
-</div> <!-- fim container principal-->
 
-<div id="container-vendedor"> <!-- Inicio container salesman -->
-    <aside>
-        <div id="barra-lateral">
-            <h2>Produto</h2>
-            <ul>
-                <li><button onclick="mostrarContainerCad()">Cadastrar</button></li>
-                <li><button onclick="mostrarContainerAlt()">Alterar</button></li>
-                <li><button onclick="mostrarContainerDel()">Deletar</button></li>
-                <li><form action="show_products"><button type="submit">Listar</button></form></li>
-            </ul>
+
+
+<header class="container">
+    <div class="row">
+        <div class="col-11 mb-3">
+            <h2 > Kim Produtos </h2>
         </div>
-    </aside>
-
-
-    <div id="container-tabela"> <!-- container tabelas-->
-        <!------------------------------- CADASTRAR -------------------------------->
-
-        <div id="container-cadastrar" hidden> <!-- Inicio container cadastrar -->
-            <h3>Cadastrar Produto</h3>
-            <div id="container-cadastro-vendedor">
-                <form action="insert_product">
-                    <fieldset>
-                        <legend>
-                            Dados do Produto:
-                        </legend>
-
-                        <label>Nome:</label><br>
-                        <input style="margin-bottom: 17px;" class="input-nome" type="text" name="nome" placeholder="Nome"><br>
-                        <label >Valor:</label><br>
-                        <input  class="input-nome" type="text" name="valor" placeholder="valor">
-
-                    </fieldset>
-                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">enviar</button></span>
-                </form>
+        <div class="col-1 mt-2">
+            <input type="button" name="logout" value="Exit" class="btn bg-danger btn-danger">
+        </div>
+        <div class="row">
+            <nav class="col-6">
+                <!-- forms -->
+                <form action="salesman" id="form-salesman" ></form>
+                <form action="sale" id="form-sale"></form>
+                <form action="product" id="form-product"></form>
+                <!-- end forms -->
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav nav-item list-header"><button type="submit" form="form-salesman" class="nav nav-link text-dark" >SALESMAN</button></li>
+                    <li class="nav nav-item list-header"><a class="nav nav-link active text-muted" >PRODUCT</a></li>
+                    <li class="nav nav-item list-header"><button type="submit" form="form-sale" class="nav nav-link text-dark" >SALE</button></li>
+                </ul>
+            </nav>
+            <div class="col-3"></div>
+            <div class="col-3" >
+                <p class="bem-vindo nav-link"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg> <span class="nome-logado">Fulano</span></p>
             </div>
-        </div> <!-- Fim container cadastrar -->
-        <!------------------------------- ALTERAR -------------------------------->
+        </div>
+    </div>
+</header>
+<div class="container mt-3" >
+    <div class="row" >
+        <aside class="col-1 bg-beige" >
 
-        <div id="container-alterar" hidden > <!-- Inicio container alterar -->
-            <h3>Alterar Produto</h3>
-            <div id="container-alterar-vendedor">
-                <form action="update_product">
-                    <fieldset>
-                        <legend>
-                            Atualizar Produto:
-                        </legend>
 
-                        <label>Informe o id:</label><br>
-                        <input class="input-nome"  type="text" name="id"><br><br><br><br>
+            <button class="btn-list-side" title="Adicionar" onclick="mostrarContainerCad()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="42" height="42"><path fill-rule="evenodd" d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"></path></svg>
+            </button>
 
-                        <label>Novo nome:</label><br>
-                        <input class="input-nome" type="text" name="nome" placeholder="nome"><br>
+            <button class="btn-list-side" title="Alterar" onclick="mostrarContainerAlt()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">
+                    <path d="M7.72 21.78a.75.75 0 001.06-1.06L5.56 17.5h14.69a.75.75 0 000-1.5H5.56l3.22-3.22a.75.75 0 10-1.06-1.06l-4.5 4.5a.75.75 0 000 1.06l4.5 4.5zm8.56-9.5a.75.75 0 11-1.06-1.06L18.44 8H3.75a.75.75 0 010-1.5h14.69l-3.22-3.22a.75.75 0 011.06-1.06l4.5 4.5a.75.75 0 010 1.06l-4.5 4.5z"></path>
+                </svg>
+            </button>
 
-                        <label>Novo valor:</label><br>
-                        <input class="input-nome" type="text" name="valor" placeholder="valor">
-                        <br><br>
-                        <input class="input-ck" type="checkbox" name="ativar" value="1"><label>Ativo</label>
+            <button class="btn-list-side" title="Deletar" onclick="mostrarContainerDel()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">
+                    <path fill-rule="evenodd" d="M5.72 5.72a.75.75 0 011.06 0L12 10.94l5.22-5.22a.75.75 0 111.06 1.06L13.06 12l5.22 5.22a.75.75 0 11-1.06 1.06L12 13.06l-5.22 5.22a.75.75 0 01-1.06-1.06L10.94 12 5.72 6.78a.75.75 0 010-1.06z"></path>
+                </svg>
+            </button>
 
-                    </fieldset>
-                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">alterar</button></span>
-                </form>
-            </div>
-        </div> <!-- Fim container alterar -->
+            <form action="show_products"> <button class="btn-list-side" title="Listar" onclick="mostrarContainerLis()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">
+                    <path fill-rule="evenodd" d="M4 7a1 1 0 100-2 1 1 0 000 2zm4.75-1.5a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zm0 6a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zm0 6a.75.75 0 000 1.5h11.5a.75.75 0 000-1.5H8.75zM5 12a1 1 0 11-2 0 1 1 0 012 0zm-1 7a1 1 0 100-2 1 1 0 000 2z"></path>
+                </svg>
+            </button></form>
+        </aside>
+        <div class="col-11">  <!-- mágica começa-->
 
-        <!------------------------------- DELETAR -------------------------------->
+            <!------------------------------- CADASTRAR -------------------------------->
 
-        <div id="container-deletar" hidden > <!-- Inicio container deletar -->
-            <h3>Deletar Produto</h3>
-            <div id="container-deletar-vendedor">
-                <form action="disable_product">
-                    <fieldset>
-                        <legend>
-                            Deletar Produto:
-                        </legend>
+            <div id="container-cadastrar" hidden> <!-- Inicio container cadastrar -->
+                <h3>Cadastrar Produto</h3>
+                <div id="container-cadastro-vendedor">
+                    <form action="insert_product">
+                        <fieldset>
+                            <legend>
+                                Dados do Produto:
+                            </legend>
 
-                        <label>Informe o ID</label><br>
-                        <input class="input-nome"  type="text" name="id"><br>
-                    </fieldset>
-                    <span style="display:block;text-align: center;"><button type="submit" class="btn-cadastro">deletar</button></span>
-                </form>
-            </div>
-        </div> <!-- Fim container deletar -->
+                            <!-- input -->
+                            <div class="input-group mb-1 ">
+								<span class="input-group-text" >
+								  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg>
+								</span>
+                                <input type="text" class="form-control" name="nome" placeholder="Product's name" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
+                            <!-- input -->
+                            <div class="input-group mb-1 ">
+								<span class="input-group-text" style="font-weight: bold; font-family: Helvetica; height: 38px; width: 42px;" >
+								  	R$
+								</span>
+                                <input type="text" class="form-control" name="valor" placeholder="Value" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
 
-    </div> <!-- fim container tabelas-->
-</div> <!-- fim container salesman -->
+                        </fieldset>
+                        <span style="display:block;text-align: center;"><button type="submit" class="btn btn-success bg-success">ENVIAR</button></span>
 
-<footer>
-    <span>&copy;2021</span>
-</footer>
+                    </form>
+                </div>
+            </div> <!-- Fim container cadastrar -->
+
+            <div id="container-alterar" hidden > <!-- Inicio container alterar -->
+                <h3>Alterar Produto</h3>
+                <div id="container-alterar-vendedor">
+                    <form action="update_product">
+                        <fieldset>
+                            <legend>
+                                Atualizar Produto:
+                            </legend>
+
+                            <!-- input -->
+                            <div class="input-group mb-4 ">
+								<span class="input-group-text" >
+								  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill-rule="evenodd" d="M9.618 1.76a.75.75 0 01.623.859L9.46 7.5h6.48l.82-5.118a.75.75 0 011.48.237L17.46 7.5h3.79a.75.75 0 010 1.5h-4.03l-.96 6h3.99a.75.75 0 110 1.5h-4.23l-.78 4.869a.75.75 0 01-1.48-.237l.74-4.632H8.02l-.78 4.869a.75.75 0 01-1.48-.237L6.5 16.5H2.745a.75.75 0 010-1.5H6.74l.96-6H3.75a.75.75 0 010-1.5h4.19l.82-5.118a.75.75 0 01.858-.622zM14.741 15l.96-6H9.22l-.96 6h6.48z"></path></svg>
+								</span>
+                                <input type="text" class="form-control input-entrada-id" name="id" placeholder="Product's ID" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
+
+                            <!-- input -->
+                            <div class="input-group mb-1 ">
+								<span class="input-group-text" >
+								  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg>
+								</span>
+                                <input type="text" class="form-control" name="nome" placeholder="Product's name" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
+
+                            <!-- input -->
+                            <div class="input-group mb-1 ">
+								<span class="input-group-text" style="font-weight: bold; font-family: Helvetica; height: 38px; width: 42px;" >
+								  	R$
+								</span>
+                                <input type="text" class="form-control" name="valor" placeholder="Value" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
+
+                            <!-- input ck-->
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" name="ativar" type="checkbox" value="1" id="flexCheckDefault">
+                                <label class="form-check-label">
+                                    Ativo
+                                </label>
+                            </div>
+                            <!-- fim input ck -->
+
+                        </fieldset>
+                        <span style="display:block;text-align: center;"><button type="submit" class="btn btn-success bg-success">ALTERAR</button></span>
+                    </form>
+                </div>
+            </div> <!-- Fim container alterar -->
+
+            <!------------------------------- DELETAR -------------------------------->
+
+            <div id="container-deletar" hidden > <!-- Inicio container deletar -->
+                <h3>Deletar Produto</h3>
+                <div id="container-deletar-vendedor">
+                    <form action="disable_product">
+                        <fieldset>
+                            <legend>
+                                Deletar Produto:
+                            </legend>
+
+                            <!-- input -->
+                            <div class="input-group mb-4 ">
+								<span class="input-group-text" >
+								  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill-rule="evenodd" d="M9.618 1.76a.75.75 0 01.623.859L9.46 7.5h6.48l.82-5.118a.75.75 0 011.48.237L17.46 7.5h3.79a.75.75 0 010 1.5h-4.03l-.96 6h3.99a.75.75 0 110 1.5h-4.23l-.78 4.869a.75.75 0 01-1.48-.237l.74-4.632H8.02l-.78 4.869a.75.75 0 01-1.48-.237L6.5 16.5H2.745a.75.75 0 010-1.5H6.74l.96-6H3.75a.75.75 0 010-1.5h4.19l.82-5.118a.75.75 0 01.858-.622zM14.741 15l.96-6H9.22l-.96 6h6.48z"></path></svg>
+								</span>
+                                <input type="text" class="form-control input-entrada-id" name="id" placeholder="Product's ID" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <!-- fim input -->
+                        </fieldset>
+                        <span style="display:block;text-align: center;"><button type="submit" class="btn btn-success bg-success">DELETAR</button></span>
+                    </form>
+                </div>
+            </div> <!-- Fim container deletar -->
+
+
+        </div> <!-- mágica termina-->
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 </body>
 </html>
