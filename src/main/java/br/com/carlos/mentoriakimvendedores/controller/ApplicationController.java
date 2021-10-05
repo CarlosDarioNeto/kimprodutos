@@ -62,10 +62,4 @@ public class ApplicationController {
         modelAndView.addObject("NovoVendedor", salesman);
         return modelAndView;
     }
-/*
-    @RequestMapping("/logout.html")
-    public ModelAndView logout() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        return modelAndView;
-    }*/
 }

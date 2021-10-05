@@ -39,7 +39,7 @@ public class SaleController {
     @GetMapping("delete_sale")
     public ModelAndView deletarVenda(@RequestParam(name = "codigoVenda") String codigoVenda) {
         saleService.deletar(codigoVenda);
-        return new ModelAndView("sale");
+        return showVenda();
     }
 
     @GetMapping("selecionar_produtos_venda")
@@ -59,8 +59,6 @@ public class SaleController {
                                        @RequestParam(name = "matricula") String matricula) {
         logger.info("Cadastrar Venda: {}", sale);
         saleService.cadastrar(sale, matricula);
-        ModelAndView modelAndView = new ModelAndView("sale");
-        modelAndView.addObject("nome", salesmanService.getLoggedUsername());
-        return modelAndView;
+        return showVenda();
     }
 }

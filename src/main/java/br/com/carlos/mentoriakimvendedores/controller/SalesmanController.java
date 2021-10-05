@@ -45,21 +45,13 @@ public class SalesmanController {
                                         @RequestParam(name = "senha") String senha,
                                         @RequestParam(name = "ativar", defaultValue = "0") boolean ativo) {
         salesmanService.alterar(new Salesman(ativo, matricula, nome, senha, " "));
-        ModelAndView modelAndView = new ModelAndView("salesman");
-        modelAndView.addObject("salesman", new Salesman("1", "1", "1"));
-        modelAndView.addObject("modalVendedor", true);
-        modelAndView.addObject("NovoVendedor", new Salesman("1", "1", "1"));
-        return modelAndView;
+        return showVendedor();
     }
 
     @GetMapping("disable_salesman")
     public ModelAndView deletarVendedor(@RequestParam(name = "matricula") String matricula) {
         salesmanService.deletar(matricula);
-        ModelAndView modelAndView = new ModelAndView("salesman");
-        modelAndView.addObject("salesman", new Salesman("1", "1", "1"));
-        modelAndView.addObject("modalVendedor", true);
-        modelAndView.addObject("NovoVendedor", new Salesman("1", "1", "1"));
-        return modelAndView;
+        return showVendedor();
     }
 
     @GetMapping("search_salesman")

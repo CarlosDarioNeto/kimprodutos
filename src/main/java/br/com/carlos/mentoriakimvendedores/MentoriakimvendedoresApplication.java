@@ -9,4 +9,8 @@ public class MentoriakimvendedoresApplication {
     public static void main(String[] args) {
         SpringApplication.run(MentoriakimvendedoresApplication.class, args);
     }
+
+    /* Salesman extends user
+    *  Saleman com a matricula sendo FK da tabela user
+    *  Saleman sendo refernciado apenas como um role*/
 }
